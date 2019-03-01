@@ -63,11 +63,22 @@ Route::get('/question/addquestion', function () {
 Route::get('/question/start-now', function (Request $request) {
     $lang = $request->lan;
     Session::put('lang', $lang);
+    Session::put('score',0);
+    Session::put('list-question',array());
     return redirect('/question/showquestion');
 });
 
 Route::get('/question/showquestion', function () {
+    if (Session::get('lang') == null){
+        return redirect('/');
+    }
     $lang = \App\Lang::all();
+    if(Session::get('score') == null){
+        Session::put('score',0);
+    }
+    if(Session::get('list-question') == null){
+        Session::put('list-question',array());
+    }
     $listQS = Session::get('list-question');
     $quj = \App\Question::where('lang', Session::get('lang'))->whereNotIn('code', $listQS)->inRandomOrder()->get()->first();
     return view('question', ['title' => 'Question', 'lang' => $lang, 'question' => $quj]);
