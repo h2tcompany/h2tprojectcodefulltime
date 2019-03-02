@@ -70,13 +70,13 @@
                 </select>
             </p>
             <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <label for="re1">Đáp án A</label>
                     <input type="text" name="re1" id="re1" class="form-control" readonly="readonly"
                            value="{{$question->re1}}" title=""
                            required="required">
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <label for="re2">Đáp án B</label>
                     <input type="text" name="re2" id="re2" class="form-control" readonly="readonly"
                            value="{{$question->re2}}" title=""
@@ -85,13 +85,13 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <label for="re3">Đáp án C</label>
                     <input type="text" name="re3" id="re1" class="form-control" readonly="readonly"
                            value="{{$question->re3}}" title=""
                            required="required">
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <label for="re4">Đáp án D</label>
                     <input type="text" name="re4" id="re4" class="form-control" readonly="readonly"
                            value="{{$question->re4}}" title=""
@@ -112,10 +112,12 @@
         <button type="button" id="checkResult" class="btn btn-success">Check result of question</button>
     </div>
     <div class="col-sm-3">
-        <div class="panel panel-default">
+        <div class="panel panel-primary">
             <div class="panel-heading">Information</div>
             <div class="panel-body">
-                <p>{{Session::get('score')}}</p>
+                @if(Session::get('acc')!=null) <p>Your score: {{Session::get('acc')->score}} </p> @endif
+                <p>Current score: {{Session::get('score')}}</p>
+                <p>Code question: {{$question->code}}</p>
             </div>
         </div>
 

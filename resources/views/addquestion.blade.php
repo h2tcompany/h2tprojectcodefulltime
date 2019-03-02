@@ -55,7 +55,7 @@
                     <option>xq-dark</option>
                 </select>
             </p>
-            <p>Select your language</p>
+            <p>Select your language programing</p>
             <p>
                 <select name="typeqs" id="typeqs" class="form-control">
                     @foreach($lang as $elm)
@@ -63,13 +63,22 @@
                     @endforeach
                 </select>
             </p>
+
+            <p>Select your language of question</p>
+            <p>
+                <select name="location" id="location" class="form-control">
+                    <option value="VN">Vietname</option>
+                    <option value="EN">English</option>
+                </select>
+            </p>
+
             <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <label for="re1">Đáp án 1</label>
                     <input type="text" name="re1" id="re1" class="form-control" value="" title=""
                            required="required">
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <label for="re2">Đáp án 2</label>
                     <input type="text" name="re2" id="re2" class="form-control" value="" title=""
                            required="required">
@@ -77,12 +86,12 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <label for="re3">Đáp án 3</label>
                     <input type="text" name="re3" id="re1" class="form-control" value="" title=""
                            required="required">
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <label for="re4">Đáp án 4</label>
                     <input type="text" name="re4" id="re4" class="form-control" value="" title=""
                            required="required">

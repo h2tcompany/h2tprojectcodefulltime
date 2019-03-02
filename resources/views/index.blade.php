@@ -1,6 +1,5 @@
 @extends('templates')
 @section('content')
-   <p style="color: blue; font-family:Consolas; font-size: 15px ">{{$message}}</p>
     <br>
     <label for="lan">Type of question</label>
    <form action="/question/start-now" method="get">

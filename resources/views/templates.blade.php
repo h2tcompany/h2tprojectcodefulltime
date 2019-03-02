@@ -34,21 +34,41 @@
                 @if(Session::get('acc') == null)
                     <li class="active" id="lienhe"><a href="/paste/all"><i class="fas fa-clipboard"></i>
                             Paste</a></li>
-                    <li class="active" id="lienhe"><a href="/account/register_page"><i class="fas fa-user-plus"></i>
-                            Sign up</a></li>
-                    <li class="active" id="lienhe"><a href="/account/login_page"><i class="fas fa-sign-in-alt"></i> Sign
-                            in</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Account
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li id="lienhe"><a href="/account/register_page"><i
+                                            class="fas fa-user-plus"></i>
+                                    Sign up</a></li>
+                            <li id="lienhe"><a href="/account/login_page"><i
+                                            class="fas fa-sign-in-alt"></i> Sign
+                                    in</a></li>
+                        </ul>
+                    </li>
+
                 @endif
                 @if(Session::get('acc') != null)
-                    <li class="active" id="lienhe"><a href="#"><i class="fas fa-user"></i>
-                            Chào {{Session::get('acc')->name}}</a></li>
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Account
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li id="lienhe"><a href="#"><i class="fas fa-user"></i>
+                                    Chào {{Session::get('acc')->name}}</a></li>
+                            <li id="lienhe"><a href="/account/changeyourpassword"><i class="fas fa-key"></i>
+                                    Change password</a></li>
+                            <li id="lienhe"><a href="/account/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+
+                        </ul>
+                    </li>
+
+
                     <li class="active" id="lienhe"><a href="/paste/all"><i class="fas fa-clipboard"></i>
                             Paste</a></li>
                     <li class="active" id="lienhe"><a href="/question/addquestion"><i class="fas fa-plus-square"></i>
                             Add question</a></li>
-                    <li class="active" id="lienhe"><a href="/account/changeyourpassword"><i class="fas fa-key"></i>
-                            Change password</a></li>
-                    <li class="active" id="lienhe"><a href="/account/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+
                     </li>
                 @endif
 
