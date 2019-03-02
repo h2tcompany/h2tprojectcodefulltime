@@ -79,14 +79,16 @@ Route::get('/question/showquestion', function () {
     }
     $listQS = Session::get('list-question');
     $quj = \App\Question::where('lang', Session::get('lang'))->whereNotIn('code', $listQS)->where('location', getLocation())->inRandomOrder()->get()->first();
+
+
     if ($quj == null) {
         $diem = Session::get('score');
         $quj = \App\Question::where('location', getLocation())->get();
 
         if ($diem == count($quj)) {
-            return redirect('/question/notify', ['message' => 'You are complete all the question of language.']);
+            return view('/notify', ['message' => 'You are complete all the question of language.','title'=>'Notify']);
         } else {
-            return redirect('/question/notify', ['message' => 'Question for this language not available']);
+            return view('/notify', ['message' => 'Question for this language not available','title'=>'Notify']);
         }
     }
     return view('question', ['title' => 'Question', 'lang' => $lang, 'question' => $quj]);

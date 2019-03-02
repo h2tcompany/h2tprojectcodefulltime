@@ -112,10 +112,12 @@
         <button type="button" id="checkResult" class="btn btn-success">Check result of question</button>
     </div>
     <div class="col-sm-3">
-        <div class="panel panel-default">
+        <div class="panel panel-primary">
             <div class="panel-heading">Information</div>
             <div class="panel-body">
-                <p>{{Session::get('score')}}</p>
+                @if(Session::get('acc')!=null) <p>Your score: {{Session::get('acc')->score}} </p> @endif
+                <p>Current score: {{Session::get('score')}}</p>
+                <p>Code question: {{$question->code}}</p>
             </div>
         </div>
 
