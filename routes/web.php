@@ -137,6 +137,7 @@ Route::get('/paste/search', 'PasteController@Search');
 
 Route::post('/paste/edit-paste', 'PasteController@EditPaste');
 Route::get('/paste/new-paste', 'PasteController@CreatePastePage');
+
 Route::get('/covert/text-to-slug', function (Request $request) {
     $title = $request->title;
     return response()->json([

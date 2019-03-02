@@ -17,7 +17,7 @@
 <body>
 
 <div class="container">
-    <nav class="navbar navbar-inverse">
+    <nav style="padding-top: 10px" class="navbar navbar-inverse">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">

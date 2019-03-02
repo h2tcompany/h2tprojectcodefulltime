@@ -102,12 +102,10 @@ class PasteController extends Controller
             ),
         ));
         $response = curl_exec($curl);
-
         $ipInfo = json_decode($response);
 
-        while ($ipInfo != null) {
+        while ($ipInfo == null) {
             $response = curl_exec($curl);
-            curl_close($curl);
             $ipInfo = json_decode($response);
         }
         curl_close($curl);
