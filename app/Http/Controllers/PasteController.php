@@ -158,6 +158,7 @@ function rand_string($length)
 
 function get_client_ip()
 {
+    ///vzcxvx
     $ipaddress = '1.55.199.209';
     if (getenv('HTTP_CLIENT_IP'))
         $ipaddress = getenv('HTTP_CLIENT_IP');
