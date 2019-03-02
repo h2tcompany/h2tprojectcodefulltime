@@ -39,16 +39,16 @@
             @endif
         @endif
         @if($acc != null && $acc->username == $paste->username)
-            <form action="" method="post">
+            <form action="/paste/edit-paste" method="post">
                 {{csrf_field()}}
                 <input type="text" name="code" value="{{$paste->code}}" style="display: none">
                 <h1>Add your title</h1>
-                <input class="form-control" type="text" name="title" placeholder="" value="{{$paste->title}}"><br>
+                <input class="form-control" type="text" name="title" placeholder="" required value="{{$paste->title}}"><br>
                 <h3>Description</h3>
                 <input class="form-control" type="text" name="description" placeholder=""
                        value="{{$paste->description}}"><br>
                 <h3>Code</h3>
-                <textarea id="code" name="contentpaste">{{$paste->contentpaste}}</textarea><br>
+                <textarea id="code" name="contentpaste" >{{$paste->contentpaste}}</textarea><br>
                 <button class="btn btn-primary">Save</button>
         @endif
                 <p><b>Select your language</b>:
@@ -123,10 +123,10 @@
                 @endif
 
                 <h3><b>Tag</b></h3>
-                <input class="form-control" type="text" name="tag" id="tag" placeholder=""
+                <input class="form-control" type="text" name="tag" required id="tag" placeholder=""
                        value="{{$paste->tag}}">
                 <h3><b>Slug</b></h3>
-                <input class="form-control" type="text" name="slug" id="slug" placeholder=""
+                <input class="form-control" type="text" name="slug" required id="slug" placeholder=""
                        value="{{$paste->slug}}">
             </form>
 
@@ -164,12 +164,7 @@
 
     <script>
 
-        @if($acc == null || ($acc!=null && $acc->username != $paste->username ))
-            document.getElementById('slug').readOnly = 'readOnly';
-            document.getElementById('tag').readOnly = 'readOnly';
-            document.getElementById('language').disabled = true;
-            document.getElementById('theme').disabled = true;
-        @endif
+
         $(document).ready(function () {
             $('#btnAnswerQuestion').on('click', function () {
                 $.ajax({
@@ -246,5 +241,12 @@
                 selectTheme();
             }
         });
+
+        @if($acc == null || ($acc!=null && $acc->username != $paste->username ))
+        document.getElementById('slug').readOnly = 'readOnly';
+        document.getElementById('tag').readOnly = 'readOnly';
+        document.getElementById('language').disabled = true;
+        document.getElementById('theme').disabled = true;
+        @endif
     </script>
 @endsection

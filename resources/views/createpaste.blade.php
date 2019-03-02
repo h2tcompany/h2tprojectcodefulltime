@@ -65,11 +65,11 @@
         <form action="/paste/new-paste" method="post">
             {{csrf_field()}}
             <h1>Add your title</h1>
-            <input class="form-control" id="title" type="text" name="title" placeholder=""><br>
+            <input class="form-control" id="title" type="text" name="title" placeholder="" required><br>
             <h3>Description</h3>
-            <input class="form-control" type="text" name="description" placeholder=""><br>
+            <input class="form-control" type="text" name="description" placeholder="" ><br>
             <h3>Content</h3>
-            <textarea id="code" name="contentpaste"></textarea><br>
+            <textarea id="code" name="contentpaste" required></textarea><br>
             <button class="btn btn-primary">Save</button>
 
             <p>Select your language:
@@ -158,9 +158,9 @@
                 </select>
             </p>
             <h3>Tag</h3>
-            <input type="text" class="form-control" name="tag">
+            <input type="text" class="form-control" required name="tag">
             <h3>Slug</h3>
-            <input class="form-control" type="text" id="slug" name="slug"><br>
+            <input class="form-control" type="text" required id="slug" name="slug"><br>
         </form>
     </div>
     <div class="col-sm-3">
