@@ -66,6 +66,7 @@ class QuestionController extends Controller
 
     public function test()
     {
-        echo $this->generateRandomString();
+        $s = "Lê Văn Thịnh";
+        echo (str_slug($s));
     }
 }
