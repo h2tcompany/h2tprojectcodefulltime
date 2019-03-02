@@ -1,17 +1,9 @@
 @php
-    $listRecent = \App\Paste::orderby('code','desc')->take(10)->get();
+    $listRecent = \App\Paste::orderby('code','desc')->take(5)->get();
 @endphp
 
-<div class="panel panel-success">
-    <div class="panel-heading">Activity</div>
-    <div class="panel-body">
-        <p><a href="/paste/new-paste">Create new paste</a></p>
-        <p><a href="/paste/all">All paste</a></p>
-    </div>
-</div>
-
-<div class="panel panel-warning">
-    <div class="panel-heading">Recent Pastes</div>
+<div class="panel panel-danger">
+    <div class="panel-heading"><b style="color: black">Recent Pastes</b></div>
     <div class="panel-body">
         @foreach($listRecent as $paste)
             <p><a href="/{{$paste->code}}">{{$paste->title}}</a></p>

@@ -156,6 +156,8 @@
             @endif
     </div>
     <div class="col-sm-3">
+        @include('searchingg')
+        @include('activity')
         @include('recentpaste')
     </div>
 

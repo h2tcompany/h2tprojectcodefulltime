@@ -1,5 +1,6 @@
 <?php
 
+use App\KeyWords;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
@@ -36,25 +37,25 @@ Route::get('/', function (Request $request) {
         }
         Session::put('score', 0);
         Session::put('list-question', []);
-        return view('notify', ['message' => $message,'title' => 'Notify']);
+        return view('notify', ['message' => $message, 'title' => 'Notify']);
     }
     return view('index', ['title' => 'Home', 'lang' => $lang]);
 });
 
 Route::get('/account/register_page', function () {
-    return view('register_page',['title'=>'Register your account']);
+    return view('register_page', ['title' => 'Register your account']);
 });
 Route::get('/account/login_page', function () {
-    return view('login',['title'=>'Login with us']);
+    return view('login', ['title' => 'Login with us']);
 });
 Route::get('/account/forgot', function () {
     return view('reset');
 });
 Route::get('/account/changeyourpassword', function () {
-    return view('changepass',['title'=> 'Change your password']);
+    return view('changepass', ['title' => 'Change your password']);
 });
 Route::get('/account/test11', function () {
-    return view('a',['title'=> 'Login']);
+    return view('a', ['title' => 'Login']);
 });
 Route::get('/question/addquestion', function () {
     $lang = \App\Lang::all();
@@ -89,20 +90,20 @@ Route::get('/question/showquestion', function () {
         $quj = \App\Question::where('location', getLocation())->get();
 
         if ($diem == count($quj)) {
-            return view('notify', ['message' => 'You are complete all the question of language.','title'=>'Notify']);
+            return view('notify', ['message' => 'You are complete all the question of language.', 'title' => 'Notify']);
         } else {
-            return view('notify', ['message' => 'Question for this language not available','title'=>'Notify']);
+            return view('notify', ['message' => 'Question for this language not available', 'title' => 'Notify']);
         }
     }
     return view('question', ['title' => 'Question', 'lang' => $lang, 'question' => $quj]);
 });
 
 
-Route::get('/test/timezone',function (){
+Route::get('/test/timezone', function () {
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
-        CURLOPT_URL => "http://ip-api.com/json/".get_client_ip(),
+        CURLOPT_URL => "http://ip-api.com/json/" . get_client_ip(),
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => "",
         CURLOPT_TIMEOUT => 30000,
@@ -131,13 +132,30 @@ Route::post('/account/changePassword', 'UserController@changePassword');
 //dai ca
 Route::get('/{code}', 'PasteController@GetPaste');
 Route::get('/a/{code}', 'PasteController@GetPasteA');
+Route::get('/search/google', function (Request $request) {
+    $keyword = $request->keyword;
+    $kOld = KeyWords::where('keyword', $keyword)->first();
+    if ($kOld == null) {
+        $k = new KeyWords();
+        $k->keyword = $keyword;
+        $k->solan = 1;
+        $k->save();
+    } else {
+        //cap nhat
+        $soLanCu = $kOld->solan;
+        KeyWords::where('keyword', $keyword)->update(['solan' => $soLanCu + 1]);
+    }
+    return response()->json([
+        'data' => 'https://www.google.com/search?q=' . 'site:codefulltime.com '.$keyword
+    ]);
+});
+
 
 Route::get('/paste/all', 'PasteController@Pastes');
 Route::get('/paste/search', 'PasteController@Search');
 
 Route::post('/paste/edit-paste', 'PasteController@EditPaste');
 Route::get('/paste/new-paste', 'PasteController@CreatePastePage');
-<<<<<<< HEAD
 
 Route::get('/covert/text-to-slug', function (Request $request) {
     $title = $request->title;
@@ -145,9 +163,6 @@ Route::get('/covert/text-to-slug', function (Request $request) {
         'result' => str_slug($title)
     ]);
 });
-
-=======
->>>>>>> origin/master
 Route::post('/paste/new-paste', 'PasteController@CreatePaste');
 
 

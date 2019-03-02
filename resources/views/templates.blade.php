@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{$title}}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -11,13 +12,21 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
           integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <meta name="description"
+          content="Hệ thống học online qua trả lời câu hỏi. Cung cấp một nền tảng notepad online. Dữ liệu sẽ được lưu trữ vĩnh viễn"/>
+    <meta name="keywords"
+          content="codefulltime, paste, note online, share code, learn with question,@if(isset($paste)){{$paste->tag}}@endif"/>
+    <meta name="author" content="H2TCompany"/>
 
+
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
     @include('editor')
 </head>
 <body>
 
 <div class="container">
-    <nav style="padding-top: 10px" class="navbar navbar-inverse">
+    <nav style="margin-top: 10px" class="navbar navbar-inverse">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
@@ -31,6 +40,7 @@
         <!-- Collection of nav links, forms, and other content for toggling -->
         <div id="navbarCollapse" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
+                <li class="active" id="lienhe"><a href="/"><i class="fas fa-clipboard"></i> Examination</a></li>
                 @if(Session::get('acc') == null)
                     <li class="active" id="lienhe"><a href="/paste/all"><i class="fas fa-clipboard"></i>
                             Paste</a></li>
@@ -46,7 +56,6 @@
                                     in</a></li>
                         </ul>
                     </li>
-
                 @endif
                 @if(Session::get('acc') != null)
 

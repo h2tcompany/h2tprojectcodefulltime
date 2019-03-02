@@ -1,5 +1,6 @@
 @extends('templates')
 @section('content')
+
     <div class="col-sm-9">
         @foreach($pastes as $paste)
             <h1><a href="/{{$paste->code}}">{{$paste->title}}</a></h1>
@@ -7,5 +8,9 @@
             <hr>
         @endforeach
     </div>
-
+    <div class="col-sm-3">
+        @include('searchingg')
+        @include('activity')
+        @include('recentpaste')
+    </div>
 @endsection

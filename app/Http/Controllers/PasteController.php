@@ -12,7 +12,7 @@ class PasteController extends Controller
 
     public function Pastes()
     {
-        $listPaste = Paste::paginate(30);
+        $listPaste = Paste::orderby('views', 'desc')->paginate(20);
         return view('paste', ['pastes' => $listPaste, 'title' => 'List paste']);
     }
 
@@ -90,7 +90,7 @@ class PasteController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "http://ip-api.com/json/" .$ip,
+            CURLOPT_URL => "http://ip-api.com/json/" . $ip,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_TIMEOUT => 30000,
