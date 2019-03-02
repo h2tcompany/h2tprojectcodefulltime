@@ -1,6 +1,13 @@
 @extends('templates')
 
 @section('content')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.14/moment-timezone.min.js"></script>
+
+    <script>
+        console.log(moment.tz.guess());
+    </script>
+
     <style>
         .CodeMirror {
             border: 1px solid black;

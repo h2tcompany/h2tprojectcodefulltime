@@ -85,9 +85,25 @@ class PasteController extends Controller
         $description = $request->description;
         $title = $request->title;
         $language = $request->language;
+        $ip = get_client_ip();
 
-        $ipInfo = file_get_contents('http://ip-api.com/json/' . get_client_ip());
-        $ipInfo = json_decode($ipInfo);
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "http://ip-api.com/json/".get_client_ip(),
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_TIMEOUT => 30000,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                // Set Here Your Requesred Headers
+                'Content-Type: application/json',
+            ),
+        ));
+        $response = curl_exec($curl);
+        curl_close($curl);
+        $ipInfo = json_decode($response);
         $timezone = $ipInfo->timezone;
         date_default_timezone_set($timezone);
         $time = date('h:i:s d-m-Y');
@@ -136,7 +152,7 @@ function rand_string($length)
 
 function get_client_ip()
 {
-    $ipaddress = '';
+    $ipaddress = '1.55.199.209';
     if (getenv('HTTP_CLIENT_IP'))
         $ipaddress = getenv('HTTP_CLIENT_IP');
     else if (getenv('HTTP_X_FORWARDED_FOR'))

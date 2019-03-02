@@ -98,6 +98,29 @@ Route::get('/question/showquestion', function () {
 });
 
 
+Route::get('/test/timezone',function (){
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => "http://ip-api.com/json/".get_client_ip(),
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_TIMEOUT => 30000,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "GET",
+        CURLOPT_HTTPHEADER => array(
+            // Set Here Your Requesred Headers
+            'Content-Type: application/json',
+        ),
+    ));
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+    curl_close($curl);
+    var_dump($response);
+
+});
+
+
 Route::post('/account/signupProcessing', 'UserController@addUser');
 Route::post('/account/logintopage', 'UserController@loginProcess');
 Route::get('/account/logout', 'UserController@logout');
@@ -127,7 +150,7 @@ Route::get('/question/checkresult', 'QuestionController@checkResult');
 
 function get_client_ip()
 {
-    $ipaddress = '';
+    $ipaddress = '1.55.199.209';
     if (getenv('HTTP_CLIENT_IP'))
         $ipaddress = getenv('HTTP_CLIENT_IP');
     else if (getenv('HTTP_X_FORWARDED_FOR'))
@@ -141,7 +164,7 @@ function get_client_ip()
     else if (getenv('REMOTE_ADDR'))
         $ipaddress = getenv('REMOTE_ADDR');
     else
-        $ipaddress = '127.0.0.1';
+        $ipaddress = '1.55.199.209';
     return $ipaddress;
 }
 
