@@ -40,7 +40,7 @@ $(document).ready(function () {
         }
         if (password.length < 8) {
             $('#error').html('Mật khẩu phải có ít nhất 8 kí tự');
-            $('#email').css('border', 'solid 1px red');
+            $('#password').css('border', 'solid 1px red');
             return false;
         }
         return true;
@@ -52,27 +52,27 @@ $(document).ready(function () {
         var password = $('#password').val();
         if (name !== '') {
             $('#error').html('');
-            $('#name').css('border', 'solid 1px white');
+            $('#name').css('border', 'solid 1px green');
         }
         if (username !== '') {
             $('#error').html('');
-            $('#username').css('border', 'solid 1px white');
+            $('#username').css('border', 'solid 1px green');
         }
         if (email !== '') {
             $('#error').html('');
-            $('#email').css('border', 'solid 1px white');
+            $('#email').css('border', 'solid 1px green');
         }
         if (validateEmail(email)) {
             $('#error').html('');
-            $('#email').css('border', 'solid 1px white');
+            $('#email').css('border', 'solid 1px green');
         }
         if (password !== '') {
             $('#error').html('')
-            $('#password').css('border', 'solid 1px white');
+            $('#password').css('border', 'solid 1px green');
         }
         if (password.length >= 8) {
             $('#error').html('');
-            $('#email').css('border', 'solid 1px white');
+            $('#email').css('border', 'solid 1px green');
         }
         return true;
     });
@@ -100,12 +100,12 @@ $(document).ready(function () {
         if (username1 !== '') {
             $('#error').html('');
             $('#err').html('');
-            $('#usernamelg').css('border', 'solid 1px white');
+            $('#usernamelg').css('border', 'solid 1px green');
         }
         if (password1 !== '') {
             $('#error').html('');
             $('#err').html('');
-            $('#passwordlg').css('border', 'solid 1px white');
+            $('#passwordlg').css('border', 'solid 1px green');
         }
         return true;
     });
@@ -125,7 +125,7 @@ $(document).ready(function () {
         var email = $('#emailrs').val();
         if (email !== '') {
             $('#error').html('');
-            $('#emailrs').css('border', 'solid 1px white');
+            $('#emailrs').css('border', 'solid 1px green');
         }
         return true;
     });
@@ -175,15 +175,15 @@ $(document).ready(function () {
         var cf = $('#confirm').val();
         if (old !== '') {
             $('#error').html('');
-            $('#oldpass').css('border', 'solid 1px white');
+            $('#oldpass').css('border', 'solid 1px green');
         }
         if (newp !== '') {
             $('#error').html('');
-            $('#newpass').css('border', 'solid 1px white');
+            $('#newpass').css('border', 'solid 1px green');
         }
         if (cf !== '') {
             $('#error').html('');
-            $('#confirm').css('border', 'solid 1px white');
+            $('#confirm').css('border', 'solid 1px green');
         }
         return true;
     });

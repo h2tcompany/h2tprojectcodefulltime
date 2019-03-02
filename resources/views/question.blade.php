@@ -71,22 +71,20 @@
             </p>
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <label for="re1"><b style="color: blue">Đáp án A: </b></label>
-                    <b id="re1" style="font-size: 15px">{{$question->re1}}</b>
+                    <p id="re1" style="font-size: 15px"><b style="color: blue"> A: </b> {{$question->re1}}</p><br>
                 </div>
+
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <label for="re2"><b style="color: blue">Đáp án B: </b></label>
-                    <b id="re2" style="font-size: 15px">{{$question->re2}}</b>
+                    <p id="re2" style="font-size: 15px"><b style="color: blue"> B: </b> {{$question->re2}}</p><br>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <label for="re3"><b style="color: blue">Đáp án C: </b></label>
-                    <b id="re3" style="font-size: 15px">{{$question->re3}}</b>
+                    <p id="re3" style="font-size: 15px"><b style="color: blue"> C: </b> {{$question->re3}}</p><br>
                 </div>
+                <br>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <label for="re4"><b style="color: blue">Đáp án D: </b></label>
-                    <b id="re4" style="font-size: 15px">{{$question->re4}}</b>
+                    <p id="re4" style="font-size: 15px"><b style="color: blue"> D: </b> {{$question->re4}}</p><br>
                 </div>
             </div>
             <p>Đáp án của bạn</p>

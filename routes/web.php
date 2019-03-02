@@ -36,22 +36,25 @@ Route::get('/', function (Request $request) {
         }
         Session::put('score', 0);
         Session::put('list-question', []);
-        return view('/question/notify', ['message' => $message]);
+        return view('notify', ['message' => $message,'title' => 'Notify']);
     }
     return view('index', ['title' => 'Home', 'lang' => $lang]);
 });
 
 Route::get('/account/register_page', function () {
-    return view('register_page');
+    return view('register_page',['title'=>'Register your account']);
 });
 Route::get('/account/login_page', function () {
-    return view('login');
+    return view('login',['title'=>'Login with us']);
 });
 Route::get('/account/forgot', function () {
     return view('reset');
 });
 Route::get('/account/changeyourpassword', function () {
-    return view('changepass');
+    return view('changepass',['title'=> 'Change your password']);
+});
+Route::get('/account/test11', function () {
+    return view('a',['title'=> 'Login']);
 });
 Route::get('/question/addquestion', function () {
     $lang = \App\Lang::all();
