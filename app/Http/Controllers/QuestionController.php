@@ -34,6 +34,7 @@ class QuestionController extends Controller
         $q->lang = $request->typeqs;
         $q->style = $request->style;
         $q->adder = Session::get('acc')->name;
+        $q->location = $request->location;
         $q->save();
         return redirect('/question/addquestion')->with('message', 'Question added');
 

@@ -33,16 +33,14 @@ Route::get('/', function (Request $request) {
             } else {
                 $message = "Rất tiếc. Bạn đã chọn đáp án sai. Tổng điểm của bạn là: " . $score . ' .Do điểm này thắp hơn điểm cũ nên điểm này không được lưu vào DB';
             }
-
         }
-
-//        $listQuestion = Session::get('list-question');
-
         Session::put('score', 0);
         Session::put('list-question', []);
+        return redirect('/question/notify', ['message' => $message]);
     }
-    return view('index', ['title' => 'Home', 'lang' => $lang, 'message' => $message]);
+    return view('index', ['title' => 'Home', 'lang' => $lang]);
 });
+
 Route::get('/account/register_page', function () {
     return view('register_page');
 });
@@ -63,26 +61,37 @@ Route::get('/question/addquestion', function () {
 Route::get('/question/start-now', function (Request $request) {
     $lang = $request->lan;
     Session::put('lang', $lang);
-    Session::put('score',0);
-    Session::put('list-question',array());
+    Session::put('score', 0);
+    Session::put('list-question', array());
     return redirect('/question/showquestion');
 });
 
 Route::get('/question/showquestion', function () {
-    if (Session::get('lang') == null){
+    if (Session::get('lang') == null) {
         return redirect('/');
     }
     $lang = \App\Lang::all();
-    if(Session::get('score') == null){
-        Session::put('score',0);
+    if (Session::get('score') == null) {
+        Session::put('score', 0);
     }
-    if(Session::get('list-question') == null){
-        Session::put('list-question',array());
+    if (Session::get('list-question') == null) {
+        Session::put('list-question', array());
     }
     $listQS = Session::get('list-question');
-    $quj = \App\Question::where('lang', Session::get('lang'))->whereNotIn('code', $listQS)->inRandomOrder()->get()->first();
+    $quj = \App\Question::where('lang', Session::get('lang'))->whereNotIn('code', $listQS)->where('location', getLocation())->inRandomOrder()->get()->first();
+    if ($quj == null) {
+        $diem = Session::get('score');
+        $quj = \App\Question::where('location', getLocation())->get();
+
+        if ($diem == count($quj)) {
+            return redirect('/question/notify', ['message' => 'You are complete all the question of language.']);
+        } else {
+            return redirect('/question/notify', ['message' => 'Question for this language not available']);
+        }
+    }
     return view('question', ['title' => 'Question', 'lang' => $lang, 'question' => $quj]);
 });
+
 
 Route::post('/account/signupProcessing', 'UserController@addUser');
 Route::post('/account/logintopage', 'UserController@loginProcess');
@@ -111,3 +120,34 @@ Route::get('/t/t/test', 'QuestionController@test');
 Route::get('/question/addQuestionProcess', 'QuestionController@addQuestion');
 Route::get('/question/checkresult', 'QuestionController@checkResult');
 
+function get_client_ip()
+{
+    $ipaddress = '';
+    if (getenv('HTTP_CLIENT_IP'))
+        $ipaddress = getenv('HTTP_CLIENT_IP');
+    else if (getenv('HTTP_X_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+    else if (getenv('HTTP_X_FORWARDED'))
+        $ipaddress = getenv('HTTP_X_FORWARDED');
+    else if (getenv('HTTP_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_FORWARDED_FOR');
+    else if (getenv('HTTP_FORWARDED'))
+        $ipaddress = getenv('HTTP_FORWARDED');
+    else if (getenv('REMOTE_ADDR'))
+        $ipaddress = getenv('REMOTE_ADDR');
+    else
+        $ipaddress = '127.0.0.1';
+    return $ipaddress;
+}
+
+function getLocation()
+{
+    $ip = get_client_ip();
+    if ($ip == '127.0.0.1') {
+        return 'VN';
+    }
+    $details = json_decode(file_get_contents("http://ipinfo.io/" . $ip . "/json"));
+    $country = $details->country;
+    if ($country != 'VN') return 'EN';
+    return 'VN';
+}

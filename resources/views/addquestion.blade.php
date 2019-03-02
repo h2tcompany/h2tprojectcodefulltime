@@ -55,7 +55,7 @@
                     <option>xq-dark</option>
                 </select>
             </p>
-            <p>Select your language</p>
+            <p>Select your language programing</p>
             <p>
                 <select name="typeqs" id="typeqs" class="form-control">
                     @foreach($lang as $elm)
@@ -63,6 +63,15 @@
                     @endforeach
                 </select>
             </p>
+
+            <p>Select your language of question</p>
+            <p>
+                <select name="location" id="location" class="form-control">
+                    <option value="VN">Vietname</option>
+                    <option value="EN">English</option>
+                </select>
+            </p>
+
             <div class="row">
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                     <label for="re1">Đáp án 1</label>
