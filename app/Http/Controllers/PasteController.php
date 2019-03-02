@@ -91,7 +91,7 @@ class PasteController extends Controller
         $timezone = $ipInfo->timezone;
         date_default_timezone_set($timezone);
         $time = date('h:i:s d-m-Y');
-        $username = '';
+        $username = 'unknow';
         $tag = $request->tag;
         $slug = $request->slug;
         if (Session::get('acc') != null) {
