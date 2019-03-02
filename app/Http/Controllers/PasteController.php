@@ -90,7 +90,7 @@ class PasteController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "http://ip-api.com/json/".get_client_ip(),
+            CURLOPT_URL => "http://ip-api.com/json/" .$ip,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_TIMEOUT => 30000,
@@ -102,8 +102,16 @@ class PasteController extends Controller
             ),
         ));
         $response = curl_exec($curl);
-        curl_close($curl);
+
         $ipInfo = json_decode($response);
+
+        while ($ipInfo != null) {
+            $response = curl_exec($curl);
+            curl_close($curl);
+            $ipInfo = json_decode($response);
+        }
+        curl_close($curl);
+
         $timezone = $ipInfo->timezone;
         date_default_timezone_set($timezone);
         $time = date('h:i:s d-m-Y');

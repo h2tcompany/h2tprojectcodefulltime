@@ -5,7 +5,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.14/moment-timezone.min.js"></script>
 
     <script>
-        console.log(moment.tz.guess());
+        $(document).ready(function () {
+            $('#title').on('change', function () {
+                $.ajax({
+                    url: '/covert/text-to-slug',
+                    data: {
+                        title: $('#title').val()
+                    },
+                    success: function (data) {
+                        // console.log(data);
+                        $('#slug').val(data.result);
+                    }
+                });
+            });
+        });
     </script>
 
     <style>
@@ -13,14 +26,38 @@
             border: 1px solid black;
             font-size: 13px
         }
-        .cm-header { font-family: arial; }
-        .cm-header-1 { font-size: 150%; }
-        .cm-header-2 { font-size: 130%; }
-        .cm-header-3 { font-size: 120%; }
-        .cm-header-4 { font-size: 110%; }
-        .cm-header-5 { font-size: 100%; }
-        .cm-header-6 { font-size: 90%; }
-        .cm-strong { font-size: 140%; }
+
+        .cm-header {
+            font-family: arial;
+        }
+
+        .cm-header-1 {
+            font-size: 150%;
+        }
+
+        .cm-header-2 {
+            font-size: 130%;
+        }
+
+        .cm-header-3 {
+            font-size: 120%;
+        }
+
+        .cm-header-4 {
+            font-size: 110%;
+        }
+
+        .cm-header-5 {
+            font-size: 100%;
+        }
+
+        .cm-header-6 {
+            font-size: 90%;
+        }
+
+        .cm-strong {
+            font-size: 140%;
+        }
     </style>
 
 
@@ -28,7 +65,7 @@
         <form action="/paste/new-paste" method="post">
             {{csrf_field()}}
             <h1>Add your title</h1>
-            <input class="form-control" type="text" name="title" placeholder=""><br>
+            <input class="form-control" id="title" type="text" name="title" placeholder=""><br>
             <h3>Description</h3>
             <input class="form-control" type="text" name="description" placeholder=""><br>
             <h3>Content</h3>
@@ -123,7 +160,7 @@
             <h3>Tag</h3>
             <input type="text" class="form-control" name="tag">
             <h3>Slug</h3>
-            <input class="form-control" type="text" name="slug"><br>
+            <input class="form-control" type="text" id="slug" name="slug"><br>
         </form>
     </div>
     <div class="col-sm-3">
@@ -153,7 +190,7 @@
             lineWrapping: true,
             foldGutter: true,
             gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-            theme:'dracula'
+            theme: 'dracula'
         });
         var input = document.getElementById("select");
 
