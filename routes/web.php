@@ -150,7 +150,7 @@ Route::get('/search/google', function (Request $request) {
     ]);
 });
 
-
+//xzcvzxvcxzv
 Route::get('/paste/all', 'PasteController@Pastes');
 Route::get('/paste/search', 'PasteController@Search');
 
