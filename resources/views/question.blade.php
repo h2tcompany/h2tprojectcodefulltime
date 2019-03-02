@@ -54,7 +54,7 @@
             {{csrf_field()}}
             @if($question->style == 'plain/text' || $question->style == 'text/html')
                 <h3><b>Content</b></h3>
-                {!! $question->ques !!}
+                <p style="font-size: 25px;font-family: Arial; color: #AF2018"><b>{!! $question->ques !!}</b></p>
                 <hr>
             @elseif($question->style == 'markdown')
                 <h3><b>Content</b></h3>
@@ -71,31 +71,22 @@
             </p>
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <label for="re1">Đáp án A</label>
-                    <input type="text" name="re1" id="re1" class="form-control" readonly="readonly"
-                           value="{{$question->re1}}" title=""
-                           required="required">
+                    <label for="re1"><b style="color: blue">Đáp án A: </b></label>
+                    <b id="re1" style="font-size: 15px">{{$question->re1}}</b>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <label for="re2">Đáp án B</label>
-                    <input type="text" name="re2" id="re2" class="form-control" readonly="readonly"
-                           value="{{$question->re2}}" title=""
-                           required="required">
-
+                    <label for="re2"><b style="color: blue">Đáp án B: </b></label>
+                    <b id="re2" style="font-size: 15px">{{$question->re2}}</b>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <label for="re3">Đáp án C</label>
-                    <input type="text" name="re3" id="re1" class="form-control" readonly="readonly"
-                           value="{{$question->re3}}" title=""
-                           required="required">
+                    <label for="re3"><b style="color: blue">Đáp án C: </b></label>
+                    <b id="re3" style="font-size: 15px">{{$question->re3}}</b>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <label for="re4">Đáp án D</label>
-                    <input type="text" name="re4" id="re4" class="form-control" readonly="readonly"
-                           value="{{$question->re4}}" title=""
-                           required="required">
+                    <label for="re4"><b style="color: blue">Đáp án D: </b></label>
+                    <b id="re4" style="font-size: 15px">{{$question->re4}}</b>
                 </div>
             </div>
             <p>Đáp án của bạn</p>
@@ -110,6 +101,8 @@
         <p><strong style="color: red" id="sai"></strong></p>
         <p><strong style="color: green" id="dung"></strong></p>
         <button type="button" id="checkResult" class="btn btn-success">Check result of question</button>
+        <br>
+        <br>
     </div>
     <div class="col-sm-3">
         <div class="panel panel-primary">

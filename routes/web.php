@@ -36,7 +36,7 @@ Route::get('/', function (Request $request) {
         }
         Session::put('score', 0);
         Session::put('list-question', []);
-        return redirect('/question/notify', ['message' => $message]);
+        return view('/question/notify', ['message' => $message]);
     }
     return view('index', ['title' => 'Home', 'lang' => $lang]);
 });
@@ -86,9 +86,9 @@ Route::get('/question/showquestion', function () {
         $quj = \App\Question::where('location', getLocation())->get();
 
         if ($diem == count($quj)) {
-            return view('/notify', ['message' => 'You are complete all the question of language.','title'=>'Notify']);
+            return view('notify', ['message' => 'You are complete all the question of language.','title'=>'Notify']);
         } else {
-            return view('/notify', ['message' => 'Question for this language not available','title'=>'Notify']);
+            return view('notify', ['message' => 'Question for this language not available','title'=>'Notify']);
         }
     }
     return view('question', ['title' => 'Question', 'lang' => $lang, 'question' => $quj]);
