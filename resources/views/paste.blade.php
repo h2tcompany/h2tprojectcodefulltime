@@ -3,7 +3,7 @@
     <div class="col-sm-9">
         @foreach($pastes as $paste)
             <h1><a href="/{{$paste->code}}">{{$paste->title}}</a></h1>
-            <p>{{$paste->username}} | {{$paste->time}} | {{$paste->views}}</p>
+            <p>Author: {{$paste->username}} | Time: {{$paste->time}} | Views: {{$paste->views}}</p>
             <hr>
         @endforeach
     </div>
