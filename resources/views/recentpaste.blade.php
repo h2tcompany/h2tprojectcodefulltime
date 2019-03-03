@@ -1,5 +1,5 @@
 @php
-    $listRecent = \App\Paste::orderby('code','desc')->take(5)->get();
+    $listRecent = \App\Paste::orderby('code','asc')->take(5)->get();
 @endphp
 
 <div class="panel panel-danger">

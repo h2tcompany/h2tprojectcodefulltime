@@ -69,7 +69,7 @@
             <h3>Description</h3>
             <input class="form-control" type="text" name="description" placeholder="" ><br>
             <h3>Content</h3>
-            <textarea id="code" name="contentpaste" required></textarea><br>
+            <textarea id="code" name="contentpaste"></textarea><br>
             <button class="btn btn-primary">Save</button>
 
             <p>Select your language:

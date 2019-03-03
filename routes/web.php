@@ -23,16 +23,16 @@ Route::get('/', function (Request $request) {
         $score = Session::get('score');
 
         if (Session::get('acc') == null) {
-            $message = "Rất tiếc. Bạn đã chọn đáp án sai. Tổng điểm của bạn là: " . $score . ' .Do không đăng nhập nên điểm sẽ không được lưu lại';
+            $message = "Sorry. You have chosen the wrong answer. Total score for you: " . $score . ' Because you not login, this score will not save in system.';
         } else {
             $acc = \App\Account::where('username', Session::get('acc')->username)->first();
             if ($acc->score <= $score) {
                 \App\Account::where('username', Session::get('acc')->username)->update([
                     'score' => $score
                 ]);
-                $message = "Rất tiếc. Bạn đã chọn đáp án sai. Tổng điểm của bạn là: " . $score . ' .Đã cập nhật điểm của bạn: ' . $score;
+                $message = "Sorry. You have chosen the wrong answer. Total score for you: " . $score . ' .Updated your score: ' . $score;
             } else {
-                $message = "Rất tiếc. Bạn đã chọn đáp án sai. Tổng điểm của bạn là: " . $score . ' .Do điểm này thắp hơn điểm cũ nên điểm này không được lưu vào DB';
+                $message = "Sorry. You have chosen the wrong answer. Total score for you: " . $score . ' .Because current score not greater than your score, this score will not save in system.';
             }
         }
         Session::put('score', 0);

@@ -11,7 +11,23 @@
                 let text = '{{$paste->contentpaste}}';
                 $('#content').html(converter.makeHtml(text));
             @endif
+			
+			$('#title').on('change', function () {
+                $.ajax({
+                    url: '/covert/text-to-slug',
+                    data: {
+                        title: $('#title').val()
+                    },
+                    success: function (data) {
+                        // console.log(data);
+                        $('#slug').val(data.result);
+                    }
+                });
+            });
         });
+		   
+            
+
     </script>
 
     @php
@@ -43,7 +59,7 @@
                 {{csrf_field()}}
                 <input type="text" name="code" value="{{$paste->code}}" style="display: none">
                 <h1>Add your title</h1>
-                <input class="form-control" type="text" name="title" placeholder="" required value="{{$paste->title}}"><br>
+                <input class="form-control" type="text" name="title"  id="title" placeholder="" required value="{{$paste->title}}"><br>
                 <h3>Description</h3>
                 <input class="form-control" type="text" name="description" placeholder=""
                        value="{{$paste->description}}"><br>
@@ -163,7 +179,20 @@
 
 
     <script>
-
+		@if($acc == null || ($acc!=null && $acc->username != $paste->username ))
+			if(document.getElementById('slug')!==undefined){
+				document.getElementById('slug').readOnly = 'readOnly';
+			}
+			if(document.getElementById('tag')!==undefined){
+				document.getElementById('tag').readOnly = 'readOnly';
+			}
+			if(document.getElementById('language')!==undefined){
+				document.getElementById('language').disabled = true;
+			}
+			if(document.getElementById('theme')!==undefined){
+				document.getElementById('theme').disabled = true;
+			}
+        @endif
 
         $(document).ready(function () {
             $('#btnAnswerQuestion').on('click', function () {
@@ -184,7 +213,6 @@
                 });
             });
         });
-
         var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
             lineNumbers: true,
             styleActiveLine: true,
@@ -242,11 +270,6 @@
             }
         });
 
-        @if($acc == null || ($acc!=null && $acc->username != $paste->username ))
-        document.getElementById('slug').readOnly = 'readOnly';
-        document.getElementById('tag').readOnly = 'readOnly';
-        document.getElementById('language').disabled = true;
-        document.getElementById('theme').disabled = true;
-        @endif
+        
     </script>
 @endsection

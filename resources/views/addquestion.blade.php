@@ -74,12 +74,12 @@
 
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <label for="re1">Đáp án 1</label>
+                    <label for="re1">Answer A</label>
                     <input type="text" name="re1" id="re1" class="form-control" value="" title=""
                            required="required">
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <label for="re2">Đáp án 2</label>
+                    <label for="re2">Answer B</label>
                     <input type="text" name="re2" id="re2" class="form-control" value="" title=""
                            required="required">
 
@@ -87,17 +87,17 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <label for="re3">Đáp án 3</label>
+                    <label for="re3">Answer C</label>
                     <input type="text" name="re3" id="re1" class="form-control" value="" title=""
                            required="required">
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <label for="re4">Đáp án 4</label>
+                    <label for="re4">Answer D</label>
                     <input type="text" name="re4" id="re4" class="form-control" value="" title=""
                            required="required">
                 </div>
             </div>
-            <p>Đáp án đúng</p>
+            <p>Answer Correct</p>
             <input type="text" name="correct" id="correct" class="form-control" value="" title="" required="required">
             <br>
             <br>

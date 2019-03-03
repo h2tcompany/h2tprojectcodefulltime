@@ -80,7 +80,7 @@ class PasteController extends Controller
     public function CreatePaste(Request $request)
     {
         $c = round(microtime(true) * 1000);
-        $code = substr($c, 5, 4) . rand_string(20);
+        $code = $c . rand_string(20);
         $contentpaste = $request->contentpaste;
         $description = $request->description;
         $title = $request->title;

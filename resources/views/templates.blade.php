@@ -13,7 +13,7 @@
           integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <meta name="description"
-          content="Hệ thống học online qua trả lời câu hỏi. Cung cấp một nền tảng notepad online. Dữ liệu sẽ được lưu trữ vĩnh viễn"/>
+          content="Examination for Java, Javascript, CSharp, Notepad online and more. You can share for earn money. You can create room for examination and share for your student"/>
     <meta name="keywords"
           content="codefulltime, paste, note online, share code, learn with question,@if(isset($paste)){{$paste->tag}}@endif"/>
     <meta name="author" content="H2TCompany"/>
@@ -75,10 +75,7 @@
 
                     <li class="active" id="lienhe"><a href="/paste/all"><i class="fas fa-clipboard"></i>
                             Paste</a></li>
-                    <li class="active" id="lienhe"><a href="/question/addquestion"><i class="fas fa-plus-square"></i>
-                            Add question</a></li>
-
-                    </li>
+                   
                 @endif
 
             </ul>
