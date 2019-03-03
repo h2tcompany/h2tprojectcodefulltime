@@ -23,6 +23,7 @@ class QuestionController extends Controller
 
     public function addQuestion(Request $request)
     {
+        $teamleader = Session::get('acc')->teamleader;
         $q = new Question();
         $q->code = $this->generateRandomString();
         $q->ques = $request->contentpaste;
@@ -35,29 +36,31 @@ class QuestionController extends Controller
         $q->style = $request->style;
         $q->adder = Session::get('acc')->name;
         $q->location = $request->location;
+        $q->team = $teamleader; // Thuộc tính team xác định câu hỏi chỉ hiển thị cho team nào đó
         $q->save();
         return redirect('/question/addquestion')->with('message', 'Question added');
-
     }
-    public function checkResult(Request $request){
+
+    public function checkResult(Request $request)
+    {
         $q = Question::where('code', $request->codeid)->first();
         $result = $request->result;
-        if ($result == $q->correct){
-            if(Session::get('score') == null){
-                Session::put('score',0);
+        if ($result == $q->correct) {
+            if (Session::get('score') == null) {
+                Session::put('score', 0);
             }
-            if(Session::get('list-question') == null){
-                Session::put('list-question',array());
+            if (Session::get('list-question') == null) {
+                Session::put('list-question', array());
             }
             $listQS = Session::get('list-question');
-            array_push($listQS,$q->code);
-            Session::put('list-question',$listQS);
-            Session::put('score',Session::get('score')+1);
+            array_push($listQS, $q->code);
+            Session::put('list-question', $listQS);
+            Session::put('score', Session::get('score') + 1);
 
             return response()->json([
                 'stt' => 'dung'
             ]);
-        }else{
+        } else {
             return response()->json([
                 'stt' => 'sai'
             ]);
@@ -67,6 +70,6 @@ class QuestionController extends Controller
     public function test()
     {
         $s = "Lê Văn Thịnh";
-        echo (str_slug($s));
+        echo(str_slug($s));
     }
 }

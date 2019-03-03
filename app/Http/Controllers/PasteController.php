@@ -13,7 +13,7 @@ class PasteController extends Controller
     public function Pastes()
     {
         $listPaste = Paste::orderby('views', 'desc')->paginate(20);
-        return view('paste', ['pastes' => $listPaste, 'title' => 'List paste']);
+        return view('paste', ['pastes' => $listPaste, 'title' => 'List paste','seeing'=>'paste']);
     }
 
     public function Search(Request $request)
@@ -33,7 +33,7 @@ class PasteController extends Controller
             KeyWords::where('keyword', $key)->update(['solan' => $soLanCu + 1]);
         }
 
-        return view('paste', ['pastes' => $listPaste, 'title' => 'Result for search with key: ' . $key]);
+        return view('paste', ['pastes' => $listPaste, 'title' => 'Result for search with key: ' . $key,'seeing'=>'paste']);
     }
 
     public function GetPaste(Request $request)
@@ -41,7 +41,7 @@ class PasteController extends Controller
         $code = $request->code;
         $paste = Paste::where('code', $code)->first();
         addView($paste);
-        return view('viewpaste', ['paste' => $paste, 'title' => $paste->title]);
+        return view('viewpaste', ['paste' => $paste, 'title' => $paste->title,'seeing'=>'paste']);
     }
 
     public function GetPasteA(Request $request)
@@ -49,12 +49,12 @@ class PasteController extends Controller
         $code = $request->code;
         $paste = Paste::where('slug', $code)->first();
         addView($paste);
-        return view('viewpaste', ['paste' => $paste, 'title' => $paste->title]);
+        return view('viewpaste', ['paste' => $paste, 'title' => $paste->title,'seeing'=>'paste']);
     }
 
     public function CreatePastePage()
     {
-        return view('createpaste', ['title' => 'Create new paste']);
+        return view('createpaste', ['title' => 'Create new paste','seeing'=>'paste']);
     }
 
     public function EditPaste(Request $request)

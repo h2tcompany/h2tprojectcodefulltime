@@ -21,6 +21,7 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
         $user->score = 0;
         $user->role = 1;
+        $user->teamleader = 'all';
         $user->save();
         return response()->json([
             'stt' => 'ok'

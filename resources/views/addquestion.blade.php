@@ -6,14 +6,38 @@
             border: 1px solid black;
             font-size: 13px
         }
-        .cm-header { font-family: arial; }
-        .cm-header-1 { font-size: 150%; }
-        .cm-header-2 { font-size: 130%; }
-        .cm-header-3 { font-size: 120%; }
-        .cm-header-4 { font-size: 110%; }
-        .cm-header-5 { font-size: 100%; }
-        .cm-header-6 { font-size: 90%; }
-        .cm-strong { font-size: 140%; }
+
+        .cm-header {
+            font-family: arial;
+        }
+
+        .cm-header-1 {
+            font-size: 150%;
+        }
+
+        .cm-header-2 {
+            font-size: 130%;
+        }
+
+        .cm-header-3 {
+            font-size: 120%;
+        }
+
+        .cm-header-4 {
+            font-size: 110%;
+        }
+
+        .cm-header-5 {
+            font-size: 100%;
+        }
+
+        .cm-header-6 {
+            font-size: 90%;
+        }
+
+        .cm-strong {
+            font-size: 140%;
+        }
 
         .footer {
             position: fixed;
@@ -59,7 +83,7 @@
             <p>
                 <select name="typeqs" id="typeqs" class="form-control">
                     @foreach($lang as $elm)
-                        <option value="{{$elm->lang}}"> -- {{$elm->name}} -- </option>
+                        <option value="{{$elm->lang}}"> -- {{$elm->name}} --</option>
                     @endforeach
                 </select>
             </p>
@@ -71,6 +95,14 @@
                     <option value="EN">English</option>
                 </select>
             </p>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <label for="re1">Your team: </label>
+                    <input type="text" name="team" readonly="readonly" @if($team=='all') style="display: none" @endif id="team" class="form-control" value="{{$team}}" title=""
+                           required="required">
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -134,7 +166,7 @@
             lineWrapping: true,
             foldGutter: true,
             gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-            theme:'dracula'
+            theme: 'dracula'
         });
         var input = document.getElementById("select");
 

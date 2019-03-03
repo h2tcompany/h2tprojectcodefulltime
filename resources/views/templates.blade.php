@@ -40,11 +40,10 @@
         <!-- Collection of nav links, forms, and other content for toggling -->
         <div id="navbarCollapse" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active" id="lienhe"><a href="/"><i class="fas fa-clipboard"></i> Examination</a></li>
+                <li @if($seeing =='examination') class="active" @endif id="lienhe"><a href="/"><i class="fas fa-clipboard"></i> Examination</a></li>
                 @if(Session::get('acc') == null)
-                    <li class="active" id="lienhe"><a href="/paste/all"><i class="fas fa-clipboard"></i>
-                            Paste</a></li>
-                    <li class="dropdown">
+
+                    <li  class=" @if($seeing =='account')active @endif  dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Account
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -59,7 +58,7 @@
                 @endif
                 @if(Session::get('acc') != null)
 
-                    <li class="dropdown">
+                    <li class=" @if($seeing =='account')active @endif  dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Account
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -72,11 +71,12 @@
                         </ul>
                     </li>
 
+                    <li style="display: none" @if($seeing =='addquestion') class="active" @endif id="lienhe"><a href="/question/addquestion"><i class="fas fa-clipboard"></i>
+                            Add question</a></li>
 
-                    <li class="active" id="lienhe"><a href="/paste/all"><i class="fas fa-clipboard"></i>
-                            Paste</a></li>
-                   
                 @endif
+                    <li @if($seeing =='paste') class="active" @endif id="lienhe"><a href="/paste/all"><i class="fas fa-clipboard"></i>
+                            Paste</a></li>
 
             </ul>
 
