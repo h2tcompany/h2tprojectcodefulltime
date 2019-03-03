@@ -106,13 +106,16 @@
         <div class="panel panel-primary">
             <div class="panel-heading">Information</div>
             <div class="panel-body">
-                @if(Session::get('acc')!=null) <p>Your score: {{Session::get('acc')->score}} </p> @endif
+                @if(Session::get('acc')!=null)
+                    <p>Your score: {{Session::get('acc')->score}} </p>
+                    <p>Your team: {{Session::get('acc')->teamleader}} </p>
+                @endif
                 <p>Current score: {{Session::get('score')}}</p>
                 <p>Code question: {{$question->code}}</p>
             </div>
         </div>
 
-
+        @include('rank')
         @include('recentpaste')
     </div>
 
