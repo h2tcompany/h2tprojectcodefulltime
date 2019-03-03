@@ -7,6 +7,7 @@
             <p>Author: {{$paste->username}} | Time: {{$paste->time}} | Views: {{$paste->views}}</p>
             <hr>
         @endforeach
+        {!! $pastes->links()!!}
     </div>
     <div class="col-sm-3">
         @include('searchingg')
