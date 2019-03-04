@@ -49,14 +49,17 @@ Route::get('/account/register_page', function () {
 Route::get('/account/login_page', function () {
     return view('login', ['title' => 'Login with us', 'seeing' => 'account']);
 });
-Route::get('/account/forgot', function () {
-    return view('reset');
+Route::get('/account/create_password_page', function () {
+    return view('createpassword', ['title' => 'Create new password', 'seeing' => 'account']);
+});
+Route::get('/account/forgotpassword', function () {
+    return view('reset',['title' => 'Get new password for account', 'seeing'=>'account']);
 });
 Route::get('/account/changeyourpassword', function () {
     return view('changepass', ['title' => 'Change your password', 'seeing' => 'account']);
 });
 Route::get('/account/test11', function () {
-    return view('a', ['title' => 'Login']);
+    return view('a', ['title' => 'Login', 'seeing'=>'account']);
 });
 
 /**
@@ -151,6 +154,8 @@ Route::post('/account/logintopage', 'UserController@loginProcess');
 Route::get('/account/logout', 'UserController@logout');
 Route::get('/account/test', 'UserController@test');
 Route::post('/account/changePassword', 'UserController@changePassword');
+Route::post('/account/get-new-password', 'UserController@sendEmail');
+Route::post('/account/create-new-password', 'UserController@getNewPassword');
 
 
 //dai ca
@@ -174,7 +179,7 @@ Route::get('/search/google', function (Request $request) {
     ]);
 });
 
-//xzcvzxvcxzv
+
 Route::get('/paste/all', 'PasteController@Pastes');
 Route::get('/paste/search', 'PasteController@Search');
 

@@ -113,9 +113,16 @@ $(document).ready(function () {
 
     //Reset form
     $('#btnRe').on('click', function () {
+        $('#notify').html('Checking info. Please wait...');
         var email = $('#emailrs').val();
+        var username = $('#username').val();
+        if (username === '' || username === undefined) {
+            $('#error').html('Vui lòng nhập tên tài khoản');
+            $('#username').css('border', 'solid 1px red');
+            return false;
+        }
         if (email === '' || email === undefined) {
-            $('#error').html('Vui lòng nhập email đăng kí tại khoản');
+            $('#error').html('Vui lòng nhập email đăng kí tài khoản');
             $('#emailrs').css('border', 'solid 1px red');
             return false;
         }
@@ -123,8 +130,15 @@ $(document).ready(function () {
     });
     $('#reset').on('keyup', function () {
         var email = $('#emailrs').val();
+        var username = $('#username').val();
+        if (username !== '') {
+            $('#error').html('');
+            $('#notify').html('');
+            $('#username').css('border', 'solid 1px green');
+        }
         if (email !== '') {
             $('#error').html('');
+            $('#notify').html('');
             $('#emailrs').css('border', 'solid 1px green');
         }
         return true;

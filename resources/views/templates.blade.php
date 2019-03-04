@@ -53,6 +53,9 @@
                             <li id="lienhe"><a href="/account/login_page"><i
                                             class="fas fa-sign-in-alt"></i> Sign
                                     in</a></li>
+                            <li id="lienhe"><a href="/account/forgotpassword"><i
+                                        class="fas fa-key"></i> Forgot your password
+                                    </a></li>
                         </ul>
                     </li>
                 @endif
