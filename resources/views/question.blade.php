@@ -126,6 +126,7 @@
             lineNumbers: true,
             styleActiveLine: true,
             matchBrackets: true,
+            readOnly: 'nocursor',
             extraKeys: {
                 "F11": function (cm) {
                     cm.setOption("fullScreen", !cm.getOption("fullScreen"));
