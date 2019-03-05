@@ -1,0 +1,122 @@
+Index: resources/views/searchingg.blade.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js\"></script>\r\n<script>\r\n    $(document).ready(function () {\r\n        $('#btnSearchGG').on('click', function () {\r\n            if ($('#keyword').val() === '') {\r\n                alert('Required fill the input')\r\n            } else {\r\n                $.ajax({\r\n                    url: '/search/google',\r\n                    data: {\r\n                        keyword: $('#keyword').val()\r\n                    },\r\n                    success: function (data) {\r\n                        window.location.href = data;\r\n                    }\r\n                });\r\n            }\r\n        });\r\n        $('#keyword').on('keyup', function (e) {\r\n            if (e.keyCode === 13) {\r\n                if ($('#keyword').val() === '') {\r\n                    alert('Required fill the input')\r\n                } else {\r\n\r\n                    $.ajax({\r\n                        url: '/search/google',\r\n                        data: {\r\n                            keyword: $('#keyword').val()\r\n                        },\r\n                        success: function (data) {\r\n                            window.location.href = data;\r\n                        }\r\n                    });\r\n                }\r\n            }\r\n        });\r\n    });\r\n</script>\r\n<div class=\"panel panel-primary\">\r\n    <div class=\"panel-heading\">Search in google</div>\r\n    <div class=\"panel-body\">\r\n        <input type=\"text\" id=\"keyword\" class=\"form-control\" style=\"margin-bottom: 5px\"\r\n               placeholder=\"Type your keyword...\">\r\n        <button id=\"btnSearchGG\" class=\"btn btn-primary\">Search</button>\r\n    </div>\r\n</div>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- resources/views/searchingg.blade.php	(revision 475069213e74a2e605c37124a3dadd568b0bddaa)
++++ resources/views/searchingg.blade.php	(date 1551552906035)
+@@ -43,4 +43,4 @@
+                placeholder="Type your keyword...">
+         <button id="btnSearchGG" class="btn btn-primary">Search</button>
+     </div>
+-</div>
+\ No newline at end of file
++</div>
+Index: routes/web.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?php\r\n\r\nuse App\\KeyWords;\r\nuse Illuminate\\Support\\Facades\\Session;\r\nuse Illuminate\\Http\\Request;\r\n\r\n/*\r\n|--------------------------------------------------------------------------\r\n| Web Routes\r\n|--------------------------------------------------------------------------\r\n|\r\n| Here is where you can register web routes for your application. These\r\n| routes are loaded by the RouteServiceProvider within a group which\r\n| contains the \"web\" middleware group. Now create something great!\r\n|\r\n*/\r\n\r\nRoute::get('/', function (Request $request) {\r\n    $lang = \\App\\Lang::all();\r\n    $info = $request->info;\r\n    $message = '';\r\n    if ($info != null) {\r\n        $score = Session::get('score');\r\n\r\n        if (Session::get('acc') == null) {\r\n            $message = \"Rất tiếc. Bạn đã chọn đáp án sai. Tổng điểm của bạn là: \" . $score . ' .Do không đăng nhập nên điểm sẽ không được lưu lại';\r\n        } else {\r\n            $acc = \\App\\Account::where('username', Session::get('acc')->username)->first();\r\n            if ($acc->score <= $score) {\r\n                \\App\\Account::where('username', Session::get('acc')->username)->update([\r\n                    'score' => $score\r\n                ]);\r\n                $message = \"Rất tiếc. Bạn đã chọn đáp án sai. Tổng điểm của bạn là: \" . $score . ' .Đã cập nhật điểm của bạn: ' . $score;\r\n            } else {\r\n                $message = \"Rất tiếc. Bạn đã chọn đáp án sai. Tổng điểm của bạn là: \" . $score . ' .Do điểm này thắp hơn điểm cũ nên điểm này không được lưu vào DB';\r\n            }\r\n        }\r\n        Session::put('score', 0);\r\n        Session::put('list-question', []);\r\n        return view('notify', ['message' => $message, 'title' => 'Notify']);\r\n    }\r\n    return view('index', ['title' => 'Home', 'lang' => $lang]);\r\n});\r\n\r\nRoute::get('/account/register_page', function () {\r\n    return view('register_page', ['title' => 'Register your account']);\r\n});\r\nRoute::get('/account/login_page', function () {\r\n    return view('login', ['title' => 'Login with us']);\r\n});\r\nRoute::get('/account/forgot', function () {\r\n    return view('reset');\r\n});\r\nRoute::get('/account/changeyourpassword', function () {\r\n    return view('changepass', ['title' => 'Change your password']);\r\n});\r\nRoute::get('/account/test11', function () {\r\n    return view('a', ['title' => 'Login']);\r\n});\r\nRoute::get('/question/addquestion', function () {\r\n    $lang = \\App\\Lang::all();\r\n    return view('addquestion', ['title' => 'Add question', 'lang' => $lang]);\r\n});\r\n\r\nRoute::get('/question/start-now', function (Request $request) {\r\n    $lang = $request->lan;\r\n    Session::put('lang', $lang);\r\n    Session::put('score', 0);\r\n    Session::put('list-question', array());\r\n    return redirect('/question/showquestion');\r\n});\r\n\r\nRoute::get('/question/showquestion', function () {\r\n    if (Session::get('lang') == null) {\r\n        return redirect('/');\r\n    }\r\n    $lang = \\App\\Lang::all();\r\n    if (Session::get('score') == null) {\r\n        Session::put('score', 0);\r\n    }\r\n    if (Session::get('list-question') == null) {\r\n        Session::put('list-question', array());\r\n    }\r\n    $listQS = Session::get('list-question');\r\n    $quj = \\App\\Question::where('lang', Session::get('lang'))->whereNotIn('code', $listQS)->where('location', getLocation())->inRandomOrder()->get()->first();\r\n\r\n\r\n    if ($quj == null) {\r\n        $diem = Session::get('score');\r\n        $quj = \\App\\Question::where('location', getLocation())->get();\r\n\r\n        if ($diem == count($quj)) {\r\n            return view('notify', ['message' => 'You are complete all the question of language.', 'title' => 'Notify']);\r\n        } else {\r\n            return view('notify', ['message' => 'Question for this language not available', 'title' => 'Notify']);\r\n        }\r\n    }\r\n    return view('question', ['title' => 'Question', 'lang' => $lang, 'question' => $quj]);\r\n});\r\n\r\n\r\nRoute::get('/test/timezone', function () {\r\n    $curl = curl_init();\r\n\r\n    curl_setopt_array($curl, array(\r\n        CURLOPT_URL => \"http://ip-api.com/json/\" . get_client_ip(),\r\n        CURLOPT_RETURNTRANSFER => true,\r\n        CURLOPT_ENCODING => \"\",\r\n        CURLOPT_TIMEOUT => 30000,\r\n        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,\r\n        CURLOPT_CUSTOMREQUEST => \"GET\",\r\n        CURLOPT_HTTPHEADER => array(\r\n            // Set Here Your Requesred Headers\r\n            'Content-Type: application/json',\r\n        ),\r\n    ));\r\n    $response = curl_exec($curl);\r\n    $err = curl_error($curl);\r\n    curl_close($curl);\r\n    var_dump($response);\r\n\r\n});\r\n\r\n\r\nRoute::post('/account/signupProcessing', 'UserController@addUser');\r\nRoute::post('/account/logintopage', 'UserController@loginProcess');\r\nRoute::get('/account/logout', 'UserController@logout');\r\nRoute::get('/account/test', 'UserController@test');\r\nRoute::post('/account/changePassword', 'UserController@changePassword');\r\n\r\n\r\n//dai ca\r\nRoute::get('/{code}', 'PasteController@GetPaste');\r\nRoute::get('/a/{code}', 'PasteController@GetPasteA');\r\nRoute::get('/search/google', function (Request $request) {\r\n    $keyword = $request->keyword;\r\n    $kOld = KeyWords::where('keyword', $keyword)->first();\r\n    if ($kOld == null) {\r\n        $k = new KeyWords();\r\n        $k->keyword = $keyword;\r\n        $k->solan = 1;\r\n        $k->save();\r\n    } else {\r\n        //cap nhat\r\n        $soLanCu = $kOld->solan;\r\n        KeyWords::where('keyword', $keyword)->update(['solan' => $soLanCu + 1]);\r\n    }\r\n    return response()->json([\r\n        'data' => 'https://www.google.com/search?q=' . 'site:codefulltime.com '.$keyword\r\n    ]);\r\n});\r\n\r\n\r\nRoute::get('/paste/all', 'PasteController@Pastes');\r\nRoute::get('/paste/search', 'PasteController@Search');\r\n\r\nRoute::post('/paste/edit-paste', 'PasteController@EditPaste');\r\nRoute::get('/paste/new-paste', 'PasteController@CreatePastePage');\r\n\r\nRoute::get('/covert/text-to-slug', function (Request $request) {\r\n    $title = $request->title;\r\n    return response()->json([\r\n        'result' => str_slug($title)\r\n    ]);\r\n});\r\nRoute::post('/paste/new-paste', 'PasteController@CreatePaste');\r\n\r\n\r\nRoute::get('/comment/add-new', 'CommentController@add');\r\n\r\n\r\nRoute::get('/t/t/test', 'QuestionController@test');\r\n\r\nRoute::get('/question/addQuestionProcess', 'QuestionController@addQuestion');\r\nRoute::get('/question/checkresult', 'QuestionController@checkResult');\r\n\r\nfunction get_client_ip()\r\n{\r\n    $ipaddress = '1.55.199.209';\r\n    if (getenv('HTTP_CLIENT_IP'))\r\n        $ipaddress = getenv('HTTP_CLIENT_IP');\r\n    else if (getenv('HTTP_X_FORWARDED_FOR'))\r\n        $ipaddress = getenv('HTTP_X_FORWARDED_FOR');\r\n    else if (getenv('HTTP_X_FORWARDED'))\r\n        $ipaddress = getenv('HTTP_X_FORWARDED');\r\n    else if (getenv('HTTP_FORWARDED_FOR'))\r\n        $ipaddress = getenv('HTTP_FORWARDED_FOR');\r\n    else if (getenv('HTTP_FORWARDED'))\r\n        $ipaddress = getenv('HTTP_FORWARDED');\r\n    else if (getenv('REMOTE_ADDR'))\r\n        $ipaddress = getenv('REMOTE_ADDR');\r\n    else\r\n        $ipaddress = '1.55.199.209';\r\n    return $ipaddress;\r\n}\r\n\r\nfunction getLocation()\r\n{\r\n    $ip = get_client_ip();\r\n    if ($ip == '127.0.0.1') {\r\n        return 'VN';\r\n    }\r\n    $details = json_decode(file_get_contents(\"http://ipinfo.io/\" . $ip . \"/json\"));\r\n    $country = $details->country;\r\n    if ($country != 'VN') return 'EN';\r\n    return 'VN';\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- routes/web.php	(revision 475069213e74a2e605c37124a3dadd568b0bddaa)
++++ routes/web.php	(date 1551552905905)
+@@ -1,6 +1,5 @@
+ <?php
+ 
+-use App\KeyWords;
+ use Illuminate\Support\Facades\Session;
+ use Illuminate\Http\Request;
+ 
+@@ -37,25 +36,25 @@
+         }
+         Session::put('score', 0);
+         Session::put('list-question', []);
+-        return view('notify', ['message' => $message, 'title' => 'Notify']);
++        return view('notify', ['message' => $message,'title' => 'Notify']);
+     }
+     return view('index', ['title' => 'Home', 'lang' => $lang]);
+ });
+ 
+ Route::get('/account/register_page', function () {
+-    return view('register_page', ['title' => 'Register your account']);
++    return view('register_page',['title'=>'Register your account']);
+ });
+ Route::get('/account/login_page', function () {
+-    return view('login', ['title' => 'Login with us']);
++    return view('login',['title'=>'Login with us']);
+ });
+ Route::get('/account/forgot', function () {
+     return view('reset');
+ });
+ Route::get('/account/changeyourpassword', function () {
+-    return view('changepass', ['title' => 'Change your password']);
++    return view('changepass',['title'=> 'Change your password']);
+ });
+ Route::get('/account/test11', function () {
+-    return view('a', ['title' => 'Login']);
++    return view('a',['title'=> 'Login']);
+ });
+ Route::get('/question/addquestion', function () {
+     $lang = \App\Lang::all();
+@@ -90,20 +89,20 @@
+         $quj = \App\Question::where('location', getLocation())->get();
+ 
+         if ($diem == count($quj)) {
+-            return view('notify', ['message' => 'You are complete all the question of language.', 'title' => 'Notify']);
++            return view('notify', ['message' => 'You are complete all the question of language.','title'=>'Notify']);
+         } else {
+-            return view('notify', ['message' => 'Question for this language not available', 'title' => 'Notify']);
++            return view('notify', ['message' => 'Question for this language not available','title'=>'Notify']);
+         }
+     }
+     return view('question', ['title' => 'Question', 'lang' => $lang, 'question' => $quj]);
+ });
+ 
+ 
+-Route::get('/test/timezone', function () {
++Route::get('/test/timezone',function (){
+     $curl = curl_init();
+ 
+     curl_setopt_array($curl, array(
+-        CURLOPT_URL => "http://ip-api.com/json/" . get_client_ip(),
++        CURLOPT_URL => "http://ip-api.com/json/".get_client_ip(),
+         CURLOPT_RETURNTRANSFER => true,
+         CURLOPT_ENCODING => "",
+         CURLOPT_TIMEOUT => 30000,
+@@ -132,24 +131,6 @@
+ //dai ca
+ Route::get('/{code}', 'PasteController@GetPaste');
+ Route::get('/a/{code}', 'PasteController@GetPasteA');
+-Route::get('/search/google', function (Request $request) {
+-    $keyword = $request->keyword;
+-    $kOld = KeyWords::where('keyword', $keyword)->first();
+-    if ($kOld == null) {
+-        $k = new KeyWords();
+-        $k->keyword = $keyword;
+-        $k->solan = 1;
+-        $k->save();
+-    } else {
+-        //cap nhat
+-        $soLanCu = $kOld->solan;
+-        KeyWords::where('keyword', $keyword)->update(['solan' => $soLanCu + 1]);
+-    }
+-    return response()->json([
+-        'data' => 'https://www.google.com/search?q=' . 'site:codefulltime.com '.$keyword
+-    ]);
+-});
+-
+ 
+ Route::get('/paste/all', 'PasteController@Pastes');
+ Route::get('/paste/search', 'PasteController@Search');
+@@ -163,6 +144,8 @@
+         'result' => str_slug($title)
+     ]);
+ });
++
++
+ Route::post('/paste/new-paste', 'PasteController@CreatePaste');
+ 
+ 
