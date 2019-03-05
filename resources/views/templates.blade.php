@@ -88,7 +88,7 @@
                     <div class="form-group">
                         <input type="text" name="key" id="key" class="form-control"
                                value=""
-                               placeholder="Anything in website">
+                               placeholder="Anything in website" required>
                     </div>
                     <button type="submit" id="btnSearch" class="btn btn-default">Search</button>
                 </form>

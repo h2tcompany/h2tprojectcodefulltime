@@ -1,10 +1,5 @@
 @extends('templates')
 @section('content')
-    <style>
-        input{
-            margin: 5px;
-        }
-    </style>
     <script src="/indexpage/js/validateform.js"></script>
 
     <div class="container">
@@ -16,17 +11,20 @@
                 <legend>Reset password</legend>
                 <div class="form-group">
                     <input type="text" class="form-control" name="username" id="username" placeholder="Your username">
-                    <input type="email" class="form-control" name="email" id="emailrs" placeholder="Your current email of account" required="required">
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" name="email" id="emailrs"
+                           placeholder="Your current email of account" required="required">
 
                 </div>
                 @if(session('flash_message'))
-                    <p style="color: red" id="error" >{{session('flash_message')}}</p>
+                    <p style="color: red" id="error">{{session('flash_message')}}</p>
                 @endif
                 @if(session('notify'))
-                    <p style="color: green" id="notify" >{{session('notify')}}</p>
+                    <p style="color: green" id="notify">{{session('notify')}}</p>
                 @endif
-                <p style="color: green" id="notify" ></p>
-                <p style="color: red" id="error" ></p>
+                <p style="color: green" id="notify"></p>
+                <p style="color: red" id="error"></p>
                 <button id="btnRe" type="submit" class="btn btn-primary">Get new password now</button>
             </form>
         </div>

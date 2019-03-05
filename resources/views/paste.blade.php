@@ -10,8 +10,10 @@
         {!! $pastes->links()!!}
     </div>
     <div class="col-sm-3">
-        @include('searchingg')
-        @include('activity')
         @include('recentpaste')
+        @include('activity')
+        @include('rank')
+        @include('searchingg')
+
     </div>
 @endsection

@@ -1,15 +1,7 @@
 @extends('templates')
 @section('content')
     <script src="/indexpage/js/validateform.js"></script>
-    <style>
-        #change {
-            padding-top: 60px;
-        }
 
-        input {
-            margin: 5px;
-        }
-    </style>
     <script>
         $(document).ready(function () {
 
@@ -49,20 +41,24 @@
 
         </div>
         <div align="center" class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-            <form id="change" class="form-group" method="post" role="form">
+            <form id="change" method="post" role="form">
                 <legend>Change your password</legend>
                 <div class="form-group">
                     <label for=""></label>
                     <input type="password" class="form-control" name="oldpass" id="oldpass"
                            placeholder="Current password">
+                </div>
+                <div class="form-group">
                     <input type="password" name="newpass" id="newpass" class="form-control" value=""
                            placeholder="New password">
+                </div>
+                <div class="form-group">
                     <input type="password" name="confirm" id="confirm" class="form-control" value=""
                            placeholder="Confirm your password">
                 </div>
             </form>
             @if(Session::get('mess') != null)
-            <p style="color: #AF2018">{{Session::get('mess')}}</p>
+                <p style="color: #AF2018">{{Session::get('mess')}}</p>
             @endif
             <p style="color: #AF2018" id="error"></p>
             <button id="btnChange" class="btn btn-primary">Change now</button>

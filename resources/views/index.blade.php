@@ -28,6 +28,7 @@
     </div>
     <div class="col-sm-3">
         @include('searchingg')
+        @include('rank')
         @include('activity')
         @include('recentpaste')
     </div>

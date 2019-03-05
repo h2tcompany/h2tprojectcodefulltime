@@ -74,7 +74,7 @@ Route::get('/question/addquestion', function (Request $request) {
     if ($teamleader == null) {
         $teamleader = 'all';
     }
-    return view('addquestion', ['title' => 'Add question', 'lang' => $lang, 'seeing' => 'addquestion', '$team' => $teamleader]);
+    return view('addquestion', ['title' => 'Add question', 'lang' => $lang, 'seeing' => 'addquestion', 'team' => $teamleader]);
 });
 
 

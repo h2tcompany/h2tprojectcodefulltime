@@ -9,4 +9,7 @@
             <p><a href="#">{{$acc->username}}</a><span class="badge" style="float: right">{{$acc->score}}</span></p>
         @endforeach
     </div>
+    <div class="panel-footer">
+        <a href="/" class="btn btn-success">Go to examination</a>
+    </div>
 </div>
