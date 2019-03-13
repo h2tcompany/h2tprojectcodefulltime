@@ -83,7 +83,7 @@
             <p>
                 <select name="typeqs" id="typeqs" class="form-control">
                     @foreach($lang as $elm)
-                        <option value="{{$elm->lang}}"> -- {{$elm->name}} --</option>
+                        <option value="{{$elm->lang}}">{{$elm->name}}</option>
                     @endforeach
                 </select>
             </p>

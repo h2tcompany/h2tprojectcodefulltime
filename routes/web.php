@@ -53,13 +53,13 @@ Route::get('/account/create_password_page', function () {
     return view('createpassword', ['title' => 'Create new password', 'seeing' => 'account']);
 });
 Route::get('/account/forgotpassword', function () {
-    return view('reset',['title' => 'Get new password for account', 'seeing'=>'account']);
+    return view('reset', ['title' => 'Get new password for account', 'seeing' => 'account']);
 });
 Route::get('/account/changeyourpassword', function () {
     return view('changepass', ['title' => 'Change your password', 'seeing' => 'account']);
 });
 Route::get('/account/test11', function () {
-    return view('a', ['title' => 'Login', 'seeing'=>'account']);
+    return view('a', ['title' => 'Login', 'seeing' => 'account']);
 });
 
 /**

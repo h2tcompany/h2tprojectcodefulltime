@@ -10,8 +10,9 @@
                     data: {
                         keyword: $('#keyword').val()
                     },
+                    method:"GET",
                     success: function (data) {
-                        window.location.href = data;
+                        window.location.href = data.data;
                     }
                 });
             }
@@ -27,8 +28,9 @@
                         data: {
                             keyword: $('#keyword').val()
                         },
+                        method:"GET",
                         success: function (data) {
-                            window.location.href = data;
+                            window.location.href = data.data;
                         }
                     });
                 }
