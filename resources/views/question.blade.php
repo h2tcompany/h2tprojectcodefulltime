@@ -100,6 +100,7 @@
         <p><strong style="color: green" id="dung"></strong></p>
         <button type="button" id="checkResult" class="btn btn-success">Check result of question</button>
         <br>
+        @include('comment')
         <br>
     </div>
     <div class="col-sm-3">

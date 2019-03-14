@@ -41,7 +41,7 @@ class PasteController extends Controller
         $code = $request->code;
         $paste = Paste::where('code', $code)->first();
         addView($paste);
-        return view('viewpaste', ['paste' => $paste, 'title' => $paste->title, 'seeing' => 'paste']);
+        return view('viewpaste', ['paste' => $paste, 'title' => $paste->title, 'seeing' => 'paste', 'codeOfCmt' => $code]);
     }
 
     public function GetPasteA(Request $request)
@@ -49,7 +49,7 @@ class PasteController extends Controller
         $code = $request->code;
         $paste = Paste::where('code', $code)->first();
         addView($paste);
-        return view('viewpaste', ['paste' => $paste, 'title' => $paste->title, 'seeing' => 'paste']);
+        return view('viewpaste', ['paste' => $paste, 'title' => $paste->title, 'seeing' => 'paste', 'codeOfCmt' => $code]);
     }
 
     public function CreatePastePage()

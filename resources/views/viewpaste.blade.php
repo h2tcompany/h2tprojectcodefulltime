@@ -146,30 +146,7 @@
                        value="{{$paste->slug}}">
             </form>
 
-            @if(Session::get('acc')==null)
-                <h3><b>Required login to view and add comment</b></h3>
-            @endif
-
-            @if(Session::get('acc')!=null)
-                <h3 ><b>Latest comment:</b></h3>
-                    <br>
-                <div style="margin-left: 5%">
-                    <p id="down"></p>
-                    @foreach($paste->listComment()->get() as $comment)
-                        <p><b style="color: red">{{$comment->username}}</b>: {{$comment->comment}}</p>
-                        <hr>
-                    @endforeach
-
-                    <div class="input-group">
-                        <input style="display: none" type="text" value="{{$paste->code}}" id="codepaste">
-                        <input aria-describedby="btnAnswerQuestion" type="text" id="my-question"
-                               placeholder="Add your comment" class="form-control">
-                        <span id="btnAnswerQuestion" style="background-color: green;color: white"
-                              class="input-group-addon"><span class="glyphicon glyphicon-send"></span></span>
-                        <p id="thongbao" style="color: red"></p>
-                    </div>
-                </div>
-            @endif
+           @include("comment")
     </div>
     <div class="col-sm-3">
         @include('recentpaste')
@@ -195,25 +172,7 @@
 			}
         @endif
 
-        $(document).ready(function () {
-            $('#btnAnswerQuestion').on('click', function () {
-                $.ajax({
-                    url: '/comment/add-new',
-                    data: {
-                        code: $('#codepaste').val(),
-                        comment: $('#my-question').val()
-                    },
-                    success: function (data) {
-                        if(data.status === 'ok'){
-                            @if($acc!=null)
-                            $('#down').append('<p><b style="color: red">{{$acc->username}}</b>: '+$('#my-question').val()+'</p>\n' +
-                                '                        <hr>');
-                            @endif
-                        }
-                    }
-                });
-            });
-        });
+
         var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
             lineNumbers: true,
             styleActiveLine: true,

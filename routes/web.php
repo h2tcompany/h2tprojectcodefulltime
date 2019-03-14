@@ -154,7 +154,7 @@ Route::get('/question/showquestion', function () {
             return view('notify', ['message' => 'Question for this language not available', 'title' => 'Notify', 'seeing' => 'addquestion']);
         }
     }
-    return view('question', ['title' => 'Question', 'lang' => $lang, 'question' => $quj, 'seeing' => 'examination']);
+    return view('question', ['title' => 'Question', 'lang' => $lang, 'question' => $quj, 'seeing' => 'examination', 'codeOfCmt' => $quj->code]);
 });
 
 
