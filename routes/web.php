@@ -19,6 +19,11 @@ Route::get('/', function (Request $request) {
     $lang = \App\Lang::all();
     $team = \App\Teams::all(); // Gửi danh sách team để cho người chơi chọn bộ câu hỏi mà mình muốn chơi
     $info = $request->info;
+
+    if (Session::get('status') == 'end') { // nếu trạng thái trả lời câu hỏi là đã trả lời xong thì set lại là bắt đầu và gửi về /
+        Session::put('status', 'start');
+        return redirect('/');
+    }
     $message = '';
     if ($info != null) {
         $score = Session::get('score');
@@ -36,11 +41,37 @@ Route::get('/', function (Request $request) {
                 $message = "Sorry. You have chosen the wrong answer. Total score for you: " . $score . ' .Because current score not greater than your score, this score will not save in system.';
             }
         }
+
+        // Thêm report tại đây
+        $times = 1;
+        $team = Session::get('team');
+        $lang = Session::get('lang');
+        $username = Session::get('acc') != null ? $acc->username : "unknow";
+
+        $rpExam = new \App\ReportExam();
+        $c = round(microtime(true) * 1000);
+        $code = $c . rand_string(20);
+        $rpExam->code = $code;
+        $rpExam->username = $username;
+        $rpExam->listquestion = join(',', Session::get("list-question"));
+        $rpExam->score = Session::get('score');
+        $rpOld = \App\ReportExam::where('team', $team)->where('lang', $lang)->where('username', $username)->orderby('code', 'desc')->first();
+        if ($rpOld != null) {
+            $times = $rpOld->times + 1;
+        }
+        $rpExam->times = $times;
+        $rpExam->time = date('h:i:s d-m-Y');
+        $rpExam->location = getLocation();
+        $rpExam->team = $team;
+        $rpExam->lang = $lang;
+        $rpExam->numberofquestion = count(Session::get("list-question"));
+        $rpExam->save();
         Session::put('score', 0);
+        Session::put('status', 'end'); // kết thúc phiên trả lời
         Session::put('list-question', []);
-        return view('notify', ['message' => $message, 'title' => 'Notify', 'seeing' => 'index']);
+        return view('notify', ['message' => $message, 'title' => 'Notify', 'seeing' => 'index', "reportexam" => $code]);
     }
-    return view('index', ['title' => 'Home', 'lang' => $lang, 'seeing' => 'index', 'teams' => $team]);
+    return view('index', ['title' => 'Examination for Java, Javascript, CSharp, Notepad online and more. You can share for earn money. You can create room for examination and share for your student', 'lang' => $lang, 'seeing' => 'index', 'teams' => $team]);
 });
 
 Route::get('/account/register_page', function () {
@@ -83,6 +114,7 @@ Route::get('/question/start-now', function (Request $request) {
     $team = $request->team;
     Session::put('lang', $lang);
     Session::put('score', 0);
+    Session::put('status', 'start'); // bắt đầu phiên trả lời
     if ($team == null) { // khỏi tạo team nếu chưa có
         Session::put('team', 'all');
     } else {
@@ -233,4 +265,16 @@ function getLocation()
     $country = $details->country;
     if ($country != 'VN') return 'EN';
     return 'VN';
+}
+
+function rand_string($length)
+{
+    $str = "";
+    $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    $size = strlen($chars);
+    for ($i = 0; $i < $length; $i++) {
+        $str .= $chars[rand(0, $size - 1)];
+    }
+    $str = substr(str_shuffle($chars), 0, $length);
+    return $str;
 }
