@@ -40,22 +40,23 @@
         <!-- Collection of nav links, forms, and other content for toggling -->
         <div id="navbarCollapse" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li @if($seeing =='examination') class="active" @endif id="lienhe"><a href="/"><i class="fas fa-clipboard"></i> Examination</a></li>
+                <li @if($seeing =='examination') class="active" @endif id="lienhe"><a href="/"><i
+                            class="fas fa-clipboard"></i> Examination</a></li>
                 @if(Session::get('acc') == null)
 
-                    <li  class=" @if($seeing =='account')active @endif  dropdown">
+                    <li class=" @if($seeing =='account')active @endif  dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Account
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li id="lienhe"><a href="/account/register_page"><i
-                                            class="fas fa-user-plus"></i>
+                                        class="fas fa-user-plus"></i>
                                     Sign up</a></li>
                             <li id="lienhe"><a href="/account/login_page"><i
-                                            class="fas fa-sign-in-alt"></i> Sign
+                                        class="fas fa-sign-in-alt"></i> Sign
                                     in</a></li>
                             <li id="lienhe"><a href="/account/forgotpassword"><i
                                         class="fas fa-key"></i> Forgot your password
-                                    </a></li>
+                                </a></li>
                         </ul>
                     </li>
                 @endif
@@ -65,7 +66,8 @@
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Account
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li id="lienhe"><a href="#"><i class="fas fa-user"></i>
+                            <li id="lienhe"><a href="/profile/{{Session::get('acc')->username}}"><i
+                                        class="fas fa-user"></i>
                                     Chào {{Session::get('acc')->name}}</a></li>
                             <li id="lienhe"><a href="/account/changeyourpassword"><i class="fas fa-key"></i>
                                     Change password</a></li>
@@ -74,12 +76,14 @@
                         </ul>
                     </li>
 
-                    <li style="display: none" @if($seeing =='addquestion') class="active" @endif id="lienhe"><a href="/question/addquestion"><i class="fas fa-clipboard"></i>
+                    <li style="display: none" @if($seeing =='addquestion') class="active" @endif id="lienhe"><a
+                            href="/question/addquestion"><i class="fas fa-clipboard"></i>
                             Add question</a></li>
 
                 @endif
-                    <li @if($seeing =='paste') class="active" @endif id="lienhe"><a href="/paste/all"><i class="fas fa-clipboard"></i>
-                            Paste</a></li>
+                <li @if($seeing =='paste') class="active" @endif id="lienhe"><a href="/paste/all"><i
+                            class="fas fa-clipboard"></i>
+                        Paste</a></li>
 
             </ul>
 

@@ -16,5 +16,9 @@ class Account extends Model
     {
         return $this->hasMany('App\\Paste', 'username');
     }
+    public function getDetails()
+    {
+        return $this->hasOne('App\\DetailsAccount', 'codeprofile');
+    }
 
 }
