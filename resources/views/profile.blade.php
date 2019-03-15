@@ -1,266 +1,387 @@
 @extends('templates')
 @section('content')
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#datepicker").datepicker();
+        });
+    </script>
     {{--Tài khoản đã cập nhật thông tin và đã đăng nhập--}}
     @if($detailsProfile != null && Session::get('acc') != null)
-        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-            @if(Session::get('acc')->username == $detailsProfile->detailsofaccount)
+        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+            @if(Session::get('acc')->username == $detailsProfile->username)
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="box-shadow-full">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="row">
-                                        <div class="col-sm-6 col-md-5">
-                                            <div class="about-img">
-                                                <img style="width: 100%"
-                                                     src="https://www.secret-source.eu/wp-content/uploads/2017/11/Laravel-logo.jpg"
-                                                     class="img-fluid rounded b-shadow-a" alt="">
-                                            </div>
+                                        <div class="col-sm-3 col-md-4">
+                                            @if($detailsProfile->gioitinh == 1)
+                                                <div class="about-img">
+                                                    <img style="width: 100%"
+                                                         src="/indexpage/img/male.png"
+                                                         class="img-fluid rounded b-shadow-a" alt="">
+                                                </div>
+                                            @endif
+                                            @if($detailsProfile->gioitinh == 0)
+                                                <div class="about-img">
+                                                    <img style="width: 50%"
+                                                         src="/indexpage/img/female.png"
+                                                         class="img-fluid rounded b-shadow-a" alt="">
+                                                </div>
+                                            @endif
                                         </div>
-                                        <div class="col-sm-6 col-md-7">
+                                        <div class="col-sm-9 col-md-8">
                                             <div class="about-info">
                                                 <p><span class="title-s"><b>Name:</b> </span>
                                                     <span>{{$acc->name}}</span></p>
-                                                <p><span class="title-s"><b>Profile:</b> </span>
-                                                    <span>{{$detailsProfile->profile}}</span></p>
                                                 <p><span class="title-s"><b>Email:</b> </span>
                                                     <span>{{$acc->email}}</span>
                                                 </p>
                                                 <p><span class="title-s"><b>Phone:</b> </span>
-                                                    <span>{{$detailsProfile->phonenumber}}</span></p>
+                                                    <span>{{$detailsProfile->sodienthoai}}</span></p>
+                                                <p><span class="title-s"><b>Date of birth:</b> </span>
+                                                    <span>{{$detailsProfile->ngaysinh}}</span></p>
+                                                <p><span class="title-s"><b>Address:</b> </span>
+                                                    <span>{{$detailsProfile->diachi}}</span></p>
+                                                <p><span class="title-s"><b>Strength:</b> </span>
+                                                    <span>{{$detailsProfile->diemmanh}}</span></p>
+                                                <p><span class="title-s"><b>Weakness:</b> </span>
+                                                    <span>{{$detailsProfile->diemyeu}}</span></p>
+                                                <p><span class="title-s"><b>Favorite:</b> </span>
+                                                    <span>{{$detailsProfile->sothich}}</span></p>
+                                                <p><span class="title-s"><b>Skills:</b> </span>
+                                                    <span>{{$detailsProfile->kynang}}</span></p>
+                                                <p><span class="title-s"><b>Project:</b> </span>
+                                                    <span>{{$detailsProfile->duan}}</span></p>
+                                                <p><span class="title-s"><b>Link facebook:</b> </span>
+                                                    <span><a href="{{$detailsProfile->fb}}">{{$detailsProfile->fb}}</a></span>
+                                                </p>
+                                                <p><span class="title-s"><b>Link youtube:</b> </span>
+                                                    <span><a
+                                                            href="{{$detailsProfile->youtube}}">{{$detailsProfile->youtube}}</a></span>
+                                                </p>
+                                                <p><span class="title-s"><b>Link twitter:</b> </span>
+                                                    <span><a
+                                                            href="{{$detailsProfile->twitter}}">{{$detailsProfile->twitter}}</a></span>
+                                                </p>
+                                                <p><span class="title-s"><b>Link Github:</b> </span>
+                                                    <span><a
+                                                            href="{{$detailsProfile->githhub}}">{{$detailsProfile->githhub}}</a></span>
+                                                </p>
+                                                <p><span class="title-s"><b>Link skype:</b> </span>
+                                                    <span><a
+                                                            href="{{$detailsProfile->skype}}">{{$detailsProfile->skype}}</a></span>
+                                                </p>
+                                                <p><span class="title-s"><b>Link website:</b> </span>
+                                                    <span><a
+                                                            href="{{$detailsProfile->website}}">{{$detailsProfile->website}}</a></span>
+                                                </p>
+                                                <p><span class="title-s"><b>Level:</b> </span>
+                                                    <span>{{$detailsProfile->trinhdo}}</span></p>
+                                                <p><span class="title-s"><b>Specialize:</b> </span>
+                                                    <span>{{$detailsProfile->chuyenmon}}</span></p>
+                                                @if($detailsProfile->gioitinh == 1)
+                                                    <p><span class="title-s"><b>Gender:</b> </span>
+                                                        <span>Nam</span></p>
+                                                @endif
+                                                @if($detailsProfile->gioitinh == 0)
+                                                    <p><span class="title-s"><b>Gender:</b> </span>
+                                                        <span>Nữ</span></p>
+                                                @endif
+                                                <p><span class="title-s"><b>Time work for a week:</b> </span>
+                                                    <span>{{$detailsProfile->sogiolamviec}}</span></p>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="skill-mf">
-                                        <p class="title-s">Skill</p>
-                                        @if($detailsProfile->skillone != null)
-                                            <span>{{$detailsProfile->skillone}}</span> <span
-                                                class="pull-right">{{$detailsProfile->percentone}}</span>
-                                            <div class="progress">
-                                                <div class="progress-bar" role="progressbar"
-                                                     style="width: {{$detailsProfile->percentone}};" aria-valuenow="85"
-                                                     aria-valuemin="0"
-                                                     aria-valuemax="100"></div>
-                                            </div>
-                                        @endif
-                                        @if($detailsProfile->skilltwo != null)
-                                            <span>{{$detailsProfile->skilltwo}}</span> <span
-                                                class="pull-right">{{$detailsProfile->percenttwo}}</span>
-                                            <div class="progress">
-                                                <div class="progress-bar" role="progressbar"
-                                                     style="width: {{$detailsProfile->percenttwo}}" aria-valuenow="75"
-                                                     aria-valuemin="0"
-                                                     aria-valuemax="100"></div>
-                                            </div>
-                                        @endif
-                                        @if($detailsProfile->skillthree != null)
-                                            <span>{{$detailsProfile->skillthree}}</span> <span
-                                                class="pull-right">{{$detailsProfile->percentthree}}</span>
-                                            <div class="progress">
-                                                <div class="progress-bar" role="progressbar"
-                                                     style="width: {{$detailsProfile->percentthree}}" aria-valuenow="50"
-                                                     aria-valuemin="0"
-                                                     aria-valuemax="100"></div>
-                                            </div>
-                                        @endif
-                                        @if($detailsProfile->skillfour != null)
-                                            <span>{{$detailsProfile->skillfour}}</span> <span
-                                                class="pull-right">{{$detailsProfile->percentfour}}</span>
-                                            <div class="progress">
-                                                <div class="progress-bar" role="progressbar"
-                                                     style="width: {{$detailsProfile->percentfour}}" aria-valuenow="90"
-                                                     aria-valuemin="0"
-                                                     aria-valuemax="100"></div>
-                                            </div>
-                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="about-me pt-4 pt-md-0">
-                                        <div class="title-box-2">
-                                            <h5 class="title-left">
-                                                <b>About me</b>
-                                            </h5>
-                                        </div>
-                                        <p class="lead">
-                                        <p>{{$detailsProfile->aboutme}}</p>
-                                        </p>
+                                        @csrf
+                                        <form style="padding-left: 120px" action="/profile/edit_profile" method="post" role="form">
+                                            <input style="display: none" type="text" name="code" value="{{$detailsProfile->codeprofile}}">
+                                            <legend>Edit your infomation of account</legend>
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <p>Date:<b style="color: #AF2018">*</b><input class="form-control"
+                                                                                                  type="text"
+                                                                                                  name="date"
+                                                                                                  id="datepicker"
+                                                                                                  value="{{$detailsProfile->ngaysinh}}"
+                                                                                                  required="required">
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <p>Phone number:<b style="color: #AF2018">*</b><input
+                                                            class="form-control" name="phone"
+                                                            type="text" id="phone"
+                                                            value="{{$detailsProfile->sodienthoai}}"
+                                                            required="required"></p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <p>Address:<b style="color: #AF2018">*</b><input
+                                                            class="form-control" name="address"
+                                                            type="text" id="address"
+                                                            value="{{$detailsProfile->diachi}}"
+                                                            required="required"></p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <p>Your strength:<textarea name="diemmanh" id="diemmanh"
+                                                                               class="form-control" cols="30"
+                                                                               rows="2">{{$detailsProfile->diemmanh}}</textarea></p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <p>Your weakness:<textarea name="diemyeu" id="diemyeu"
+                                                                               class="form-control" cols="30"
+                                                                               rows="2">{{$detailsProfile->diemyeu}}</textarea></p>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <p>Level: <input type="text" name="trinhdo" class="form-control" value="{{$detailsProfile->trinhdo}}">
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <p>Speciallize: <input type="text" name="chuyenmon"
+                                                                           class="form-control" id=""
+                                                                           value="{{$detailsProfile->chuyenmon}}"
+                                                                           placeholder=""></p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <p>Time work for a week: <input type="text" name="sogiolamviec"
+                                                                                    class="form-control"
+                                                                                    value="{{$detailsProfile->sogiolamviec}}"
+                                                                                    id="" placeholder=""></p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-12 radio">
+                                                    <p>Gender:<b style="color: #AF2018">*</b></p>
+                                                    @if($detailsProfile->gioitinh == 1)
+                                                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                                                            <label>
+                                                                <input type="radio" name="gioitinh" value="1"
+                                                                       checked="true">
+                                                                Male
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                                                            <label>
+                                                                <input type="radio" name="gioitinh" value="0">
+                                                                Female
+                                                            </label>
+                                                        </div>
+                                                        @endif
+                                                    @if($detailsProfile->gioitinh == 0)
+                                                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                                                            <label>
+                                                                <input type="radio" name="gioitinh" value="1">
+                                                                Mail
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                                                            <label>
+                                                                <input type="radio" name="gioitinh" value="0"
+                                                                       checked="true">
+                                                                Female
+                                                            </label>
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <p>Your Skills:<b style="color: #AF2018">*</b><textarea
+                                                            name="kinang" id="kinang"
+                                                            class="form-control" cols="30"
+                                                            required="required"
+                                                            rows="2">{{$detailsProfile->kynang}}</textarea></p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <p>Your favorite:<textarea name="sothich" id="sothich"
+                                                                               class="form-control" cols="30"
+                                                                               rows="2">{{$detailsProfile->sothich}}</textarea></p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <p>Your project:<textarea name="duan" id="duan" class="form-control"
+                                                                              cols="30"
+                                                                              rows="2"
+                                                        >{{$detailsProfile->duan}}</textarea></p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <p>Your Facebook: <input type="text" name="fb" class="form-control"
+                                                                             id=""
+                                                                             placeholder=""
+                                                                             value="{{$detailsProfile->fb}}"></p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <p>Your Youtube: <input type="text" name="youtube"
+                                                                            class="form-control" id=""
+                                                                            placeholder=""
+                                                                            value="{{$detailsProfile->youtube}}"></p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <p>Your Twitter: <input type="text" name="twitter"
+                                                                            class="form-control" id=""
+                                                                            value="{{$detailsProfile->twitter}}"
+                                                                            placeholder=""></p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <p>Your Github: <input type="text" name="git" class="form-control"
+                                                                           value="{{$detailsProfile->githhub}}"
+                                                                           id="" placeholder="">
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <p>Your Skype: <input type="text" name="skype" class="form-control"
+                                                                          value="{{$detailsProfile->skype}}"
+                                                                          id=""
+                                                                          placeholder=""></p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <p>Your website: <input type="text" name="website"
+                                                                            class="form-control" id=""
+                                                                            value="{{$detailsProfile->website}}"
+                                                                            placeholder=""></p>
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                        <br/>
+                                        @if(Session::get('mess') != null)<p style="color: green">{{Session::get('mess')}}</p>@endif
+                                        <button style="margin-left: 130px" type="submit" class="btn btn-primary"><i class="fas fa-edit"></i>
+                                            Edit your information
+                                        </button>
+                                        <a  href="/" class="btn btn-success"><i class="fas fa-home"></i>
+                                            Back to home
+                                        </a>
+                                        <br/>
+                                        <br/>
+                                        <br/>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="row">
-                    @csrf
-                    <form action="/profile/edit_profile" method="post">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                                <h2>Update your profile account</h2>
-                                <hr/>
-                                <input type="text" style="display: none" name="codeprofile" value="{{$detailsProfile->codeprofile}}">
-                                <label for="phone">Phone number: </label>
-                                <input type="text" name="phone" id="phone" class="form-control"
-                                       value="{{$detailsProfile->phonenumber}}"
-                                       title="Phone number"
-                                       required="required"/>
-                                <label for="profile">Profile: </label>
-                                <input type="text" name="profile" id="profile" class="form-control"
-                                       value="{{$detailsProfile->profile}}"
-                                       title="Profile"
-                                       required="required"/>
-                                <div class="row">
-                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                        <label for="skill1">What's skill one?: </label>
-                                        <input type="text" name="skill1" id="skill1" class="form-control"
-                                               value="{{$detailsProfile->skillone}}"
-                                               title="skill1"
-                                               required="required"/>
-                                        <label for="skill2">What's skill two?: </label>
-                                        <input type="text" name="skill2" id="skill2" class="form-control"
-                                               value="{{$detailsProfile->skilltwo}}"
-                                               title="skill2"
-                                               required="required"/>
-                                        <label for="skill3">What's skill three?: </label>
-                                        <input type="text" name="skill3" id="skill3" class="form-control"
-                                               value="{{$detailsProfile->skillthree}}"
-                                               title="skill3"
-                                               required="required"/>
-                                        <label for="skill4">What's skill four?: </label>
-                                        <input type="text" name="skill4" id="skill4" class="form-control"
-                                               value="{{$detailsProfile->skillfour}}"
-                                               title="skill4"
-                                               required="required"/>
-                                    </div>
-                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                        <label for="pskill1">Percent of skill one?: </label>
-                                        <input type="text" name="pskill1" id="pskill1" class="form-control"
-                                               value="{{$detailsProfile->percentone}}"
-                                               title="skill1"
-                                               required="required"/>
-                                        <label for="pskill2">Percent of skill two?: </label>
-                                        <input type="text" name="pskill2" id="pskill2" class="form-control"
-                                               value="{{$detailsProfile->percenttwo}}"
-                                               title="skill2"
-                                               required="required"/>
-                                        <label for="pskill3">Percent of skill three?: </label>
-                                        <input type="text" name="pskill3" id="pskill3" class="form-control"
-                                               value="{{$detailsProfile->percentthree}}"
-                                               title="skill3"
-                                               required="required"/>
-                                        <label for="pskill4">Percent of skill four?: </label>
-                                        <input type="text" name="pskill4" id="pskill4" class="form-control"
-                                               value="{{$detailsProfile->percentfour}}"
-                                               title="skill4"
-                                               required="required"/>
-                                    </div>
-                                </div>
-
-                                <label for="about">About you: </label>
-                                <textarea name="about" class="form-control" id="about" rows="5"
-                                          required="required">{{$detailsProfile->aboutme}}</textarea>
-                                <br/>
-                                @if(Session::get('mess') != null)<p
-                                    style="color: green">{{Session::get('mess')}}</p>@endif
-                                <button type="submit" class="btn btn-primary">Edit your profile</button>
-                                <br/>
-                                <br/>
-                                <br/>
-                            </div>
-
-                        </div>
-                    </form>
                 </div>
             @endif
-            @if(Session::get('acc')->username != $detailsProfile->detailsofaccount)
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="box-shadow-full">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="row">
-                                            <div class="col-sm-6 col-md-5">
-                                                <div class="about-img">
-                                                    <img style="width: 100%"
-                                                         src="https://www.secret-source.eu/wp-content/uploads/2017/11/Laravel-logo.jpg"
-                                                         class="img-fluid rounded b-shadow-a" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6 col-md-7">
-                                                <div class="about-info">
-                                                    <p><span class="title-s"><b>Name:</b> </span>
-                                                        <span>{{$acc->name}}</span></p>
-                                                    <p><span class="title-s"><b>Profile:</b> </span>
-                                                        <span>{{$detailsProfile->profile}}</span></p>
-                                                    <p><span class="title-s"><b>Email:</b> </span>
-                                                        <span>{{$acc->email}}</span>
-                                                    </p>
-                                                    <p><span class="title-s"><b>Phone:</b> </span>
-                                                        <span>{{$detailsProfile->phonenumber}}</span></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="skill-mf">
-                                            <p class="title-s">Skill</p>
-                                            @if($detailsProfile->skillone != null)
-                                                <span>{{$detailsProfile->skillone}}</span> <span
-                                                    class="pull-right">{{$detailsProfile->percentone}}</span>
-                                                <div class="progress">
-                                                    <div class="progress-bar" role="progressbar"
-                                                         style="width: {{$detailsProfile->percentone}};" aria-valuenow="85"
-                                                         aria-valuemin="0"
-                                                         aria-valuemax="100"></div>
-                                                </div>
-                                            @endif
-                                            @if($detailsProfile->skilltwo != null)
-                                                <span>{{$detailsProfile->skilltwo}}</span> <span
-                                                    class="pull-right">{{$detailsProfile->percenttwo}}</span>
-                                                <div class="progress">
-                                                    <div class="progress-bar" role="progressbar"
-                                                         style="width: {{$detailsProfile->percenttwo}}" aria-valuenow="75"
-                                                         aria-valuemin="0"
-                                                         aria-valuemax="100"></div>
-                                                </div>
-                                            @endif
-                                            @if($detailsProfile->skillthree != null)
-                                                <span>{{$detailsProfile->skillthree}}</span> <span
-                                                    class="pull-right">{{$detailsProfile->percentthree}}</span>
-                                                <div class="progress">
-                                                    <div class="progress-bar" role="progressbar"
-                                                         style="width: {{$detailsProfile->percentthree}}" aria-valuenow="50"
-                                                         aria-valuemin="0"
-                                                         aria-valuemax="100"></div>
-                                                </div>
-                                            @endif
-                                            @if($detailsProfile->skillfour != null)
-                                                <span>{{$detailsProfile->skillfour}}</span> <span
-                                                    class="pull-right">{{$detailsProfile->percentfour}}</span>
-                                                <div class="progress">
-                                                    <div class="progress-bar" role="progressbar"
-                                                         style="width: {{$detailsProfile->percentfour}}" aria-valuenow="90"
-                                                         aria-valuemin="0"
-                                                         aria-valuemax="100"></div>
-                                                </div>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="about-me pt-4 pt-md-0">
-                                            <div class="title-box-2">
-                                                <h5 class="title-left">
-                                                    <b>About me</b>
-                                                </h5>
-                                            </div>
-                                            <p class="lead">
-                                            <p>{{$detailsProfile->aboutme}}</p>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
+            @if(Session::get('acc')->username != $detailsProfile->username)
+                <div class="row">
+                    <div class="col-sm-6 col-md-5">
+                        @if($detailsProfile->gioitinh == 1)
+                            <div class="about-img">
+                                <img style="width: 35%; margin-left: 130px"
+                                     src="/indexpage/img/male.png"
+                                     class="img-fluid rounded b-shadow-a" alt="">
                             </div>
-                        </div>
+                        @endif
+                        @if($detailsProfile->gioitinh == 0)
+                            <div class="about-img">
+                                <img style="width: 35%; margin-left: 130px"
+                                     src="/indexpage/img/female.png"
+                                     class="img-fluid rounded b-shadow-a" alt="">
+                            </div>
+                        @endif
                     </div>
+                    <div class="col-sm-6 col-md-7">
+                        <div class="about-info">
+                            <p><span class="title-s"><b>Name:</b> </span>
+                                <span>{{$acc->name}}</span></p>
+                            <p><span class="title-s"><b>Email:</b> </span>
+                                <span>{{$acc->email}}</span>
+                            </p>
+                            <p><span class="title-s"><b>Phone:</b> </span>
+                                <span>{{$detailsProfile->sodienthoai}}</span></p>
+                            <p><span class="title-s"><b>Date of birth:</b> </span>
+                                <span>{{$detailsProfile->ngaysinh}}</span></p>
+                            <p><span class="title-s"><b>Address:</b> </span>
+                                <span>{{$detailsProfile->diachi}}</span></p>
+                            <p><span class="title-s"><b>Strength:</b> </span>
+                                <span>{{$detailsProfile->diemmanh}}</span></p>
+                            <p><span class="title-s"><b>Weakness:</b> </span>
+                                <span>{{$detailsProfile->diemyeu}}</span></p>
+                            <p><span class="title-s"><b>Favorite:</b> </span>
+                                <span>{{$detailsProfile->sothich}}</span></p>
+                            <p><span class="title-s"><b>Skills:</b> </span>
+                                <span>{{$detailsProfile->kynang}}</span></p>
+                            <p><span class="title-s"><b>Project:</b> </span>
+                                <span>{{$detailsProfile->duan}}</span></p>
+                            <p><span class="title-s"><b>Link facebook:</b> </span>
+                                <span><a href="{{$detailsProfile->fb}}">{{$detailsProfile->fb}}</a></span>
+                            </p>
+                            <p><span class="title-s"><b>Link youtube:</b> </span>
+                                <span><a
+                                        href="{{$detailsProfile->youtube}}">{{$detailsProfile->youtube}}</a></span>
+                            </p>
+                            <p><span class="title-s"><b>Link twitter:</b> </span>
+                                <span><a
+                                        href="{{$detailsProfile->twitter}}">{{$detailsProfile->twitter}}</a></span>
+                            </p>
+                            <p><span class="title-s"><b>Link Github:</b> </span>
+                                <span><a
+                                        href="{{$detailsProfile->githhub}}">{{$detailsProfile->githhub}}</a></span>
+                            </p>
+                            <p><span class="title-s"><b>Link skype:</b> </span>
+                                <span><a
+                                        href="{{$detailsProfile->skype}}">{{$detailsProfile->skype}}</a></span>
+                            </p>
+                            <p><span class="title-s"><b>Link website:</b> </span>
+                                <span><a
+                                        href="{{$detailsProfile->website}}">{{$detailsProfile->website}}</a></span>
+                            </p>
+                            <p><span class="title-s"><b>Level:</b> </span>
+                                <span>{{$detailsProfile->trinhdo}}</span></p>
+                            <p><span class="title-s"><b>Specialize:</b> </span>
+                                <span>{{$detailsProfile->chuyenmon}}</span></p>
+                            @if($detailsProfile->gioitinh == 1)
+                                <p><span class="title-s"><b>Gender:</b> </span>
+                                    <span>Nam</span></p>
+                            @endif
+                            @if($detailsProfile->gioitinh == 0)
+                                <p><span class="title-s"><b>Gender:</b> </span>
+                                    <span>Nữ</span></p>
+                            @endif
+                            <p><span class="title-s"><b>Time work for a week:</b> </span>
+                                <span>{{$detailsProfile->sogiolamviec}}</span></p>
+                        </div>
+                        <a style="margin-left: 15px"  href="/" class="btn btn-success"><i class="fas fa-home"></i>
+                            Back to home
+                        </a>
+                    </div>
+                </div>
             @endif
             <br>
         </div>
@@ -275,80 +396,86 @@
                         <div class="col-md-6">
                             <div class="row">
                                 <div class="col-sm-6 col-md-5">
-                                    <div class="about-img">
-                                        <img style="width: 100%"
-                                             src="https://www.secret-source.eu/wp-content/uploads/2017/11/Laravel-logo.jpg"
-                                             class="img-fluid rounded b-shadow-a" alt="">
-                                    </div>
+                                    @if($detailsProfile->gioitinh == 1)
+                                        <div class="about-img">
+                                            <img style="width: 60%; margin-left: 60px"
+                                                 src="/indexpage/img/male.png"
+                                                 class="img-fluid rounded b-shadow-a" alt="">
+                                        </div>
+                                    @endif
+                                    @if($detailsProfile->gioitinh == 0)
+                                        <div class="about-img">
+                                            <img style="width: 60%; margin-left: 60px"
+                                                 src="/indexpage/img/female.png"
+                                                 class="img-fluid rounded b-shadow-a" alt="">
+                                        </div>
+                                    @endif
                                 </div>
                                 <div class="col-sm-6 col-md-7">
                                     <div class="about-info">
                                         <p><span class="title-s"><b>Name:</b> </span>
                                             <span>{{$acc->name}}</span></p>
-                                        <p><span class="title-s"><b>Profile:</b> </span>
-                                            <span>{{$detailsProfile->profile}}</span></p>
                                         <p><span class="title-s"><b>Email:</b> </span>
                                             <span>{{$acc->email}}</span>
                                         </p>
                                         <p><span class="title-s"><b>Phone:</b> </span>
-                                            <span>{{$detailsProfile->phonenumber}}</span></p>
+                                            <span>{{$detailsProfile->sodienthoai}}</span></p>
+                                        <p><span class="title-s"><b>Date of birth:</b> </span>
+                                            <span>{{$detailsProfile->ngaysinh}}</span></p>
+                                        <p><span class="title-s"><b>Address:</b> </span>
+                                            <span>{{$detailsProfile->diachi}}</span></p>
+                                        <p><span class="title-s"><b>Strength:</b> </span>
+                                            <span>{{$detailsProfile->diemmanh}}</span></p>
+                                        <p><span class="title-s"><b>Weakness:</b> </span>
+                                            <span>{{$detailsProfile->diemyeu}}</span></p>
+                                        <p><span class="title-s"><b>Favorite:</b> </span>
+                                            <span>{{$detailsProfile->sothich}}</span></p>
+                                        <p><span class="title-s"><b>Skills:</b> </span>
+                                            <span>{{$detailsProfile->kynang}}</span></p>
+                                        <p><span class="title-s"><b>Project:</b> </span>
+                                            <span>{{$detailsProfile->duan}}</span></p>
+                                        <p><span class="title-s"><b>Link facebook:</b> </span>
+                                            <span><a href="{{$detailsProfile->fb}}">{{$detailsProfile->fb}}</a></span>
+                                        </p>
+                                        <p><span class="title-s"><b>Link youtube:</b> </span>
+                                            <span><a
+                                                    href="{{$detailsProfile->youtube}}">{{$detailsProfile->youtube}}</a></span>
+                                        </p>
+                                        <p><span class="title-s"><b>Link twitter:</b> </span>
+                                            <span><a
+                                                    href="{{$detailsProfile->twitter}}">{{$detailsProfile->twitter}}</a></span>
+                                        </p>
+                                        <p><span class="title-s"><b>Link Github:</b> </span>
+                                            <span><a
+                                                    href="{{$detailsProfile->githhub}}">{{$detailsProfile->githhub}}</a></span>
+                                        </p>
+                                        <p><span class="title-s"><b>Link skype:</b> </span>
+                                            <span><a
+                                                    href="{{$detailsProfile->skype}}">{{$detailsProfile->skype}}</a></span>
+                                        </p>
+                                        <p><span class="title-s"><b>Link website:</b> </span>
+                                            <span><a
+                                                    href="{{$detailsProfile->website}}">{{$detailsProfile->website}}</a></span>
+                                        </p>
+                                        <p><span class="title-s"><b>Level:</b> </span>
+                                            <span>{{$detailsProfile->trinhdo}}</span></p>
+                                        <p><span class="title-s"><b>Specialize:</b> </span>
+                                            <span>{{$detailsProfile->chuyenmon}}</span></p>
+                                        @if($detailsProfile->gioitinh == 1)
+                                            <p><span class="title-s"><b>Gender:</b> </span>
+                                                <span>Nam</span></p>
+                                        @endif
+                                        @if($detailsProfile->gioitinh == 0)
+                                            <p><span class="title-s"><b>Gender:</b> </span>
+                                                <span>Nữ</span></p>
+                                        @endif
+                                        <p><span class="title-s"><b>Time work for a week:</b> </span>
+                                            <span>{{$detailsProfile->sogiolamviec}}</span></p>
                                     </div>
+                                    <a style="margin-left: 15px"  href="/" class="btn btn-success"><i class="fas fa-home"></i>
+                                        Back to home
+                                    </a>
                                 </div>
-                            </div>
-                            <div class="skill-mf">
-                                <p class="title-s">Skill</p>
-                                @if($detailsProfile->skillone != null)
-                                    <span>{{$detailsProfile->skillone}}</span> <span
-                                        class="pull-right">{{$detailsProfile->percentone}}</span>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar"
-                                             style="width: {{$detailsProfile->percentone}};" aria-valuenow="85"
-                                             aria-valuemin="0"
-                                             aria-valuemax="100"></div>
-                                    </div>
-                                @endif
-                                @if($detailsProfile->skilltwo != null)
-                                    <span>{{$detailsProfile->skilltwo}}</span> <span
-                                        class="pull-right">{{$detailsProfile->percenttwo}}</span>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar"
-                                             style="width: {{$detailsProfile->percenttwo}}" aria-valuenow="75"
-                                             aria-valuemin="0"
-                                             aria-valuemax="100"></div>
-                                    </div>
-                                @endif
-                                @if($detailsProfile->skillthree != null)
-                                    <span>{{$detailsProfile->skillthree}}</span> <span
-                                        class="pull-right">{{$detailsProfile->percentthree}}</span>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar"
-                                             style="width: {{$detailsProfile->percentthree}}" aria-valuenow="50"
-                                             aria-valuemin="0"
-                                             aria-valuemax="100"></div>
-                                    </div>
-                                @endif
-                                @if($detailsProfile->skillfour != null)
-                                    <span>{{$detailsProfile->skillfour}}</span> <span
-                                        class="pull-right">{{$detailsProfile->percentfour}}</span>
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar"
-                                             style="width: {{$detailsProfile->percentfour}}" aria-valuenow="90"
-                                             aria-valuemin="0"
-                                             aria-valuemax="100"></div>
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="about-me pt-4 pt-md-0">
-                                <div class="title-box-2">
-                                    <h5 class="title-left">
-                                        <b>About me</b>
-                                    </h5>
-                                </div>
-                                <p class="lead">
-                                <p>{{$detailsProfile->aboutme}}</p>
-                                </p>
                             </div>
                         </div>
                     </div>
@@ -360,74 +487,159 @@
     {{--Tài khoản chưa cập nhật thông tin và đã đăng nhập--}}
     @if($detailsProfile == null && Session::get('acc') != null)
         @if(Session::get('acc')->username == $acc->username)
-            @csrf
-            <div class="row">
+            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                @csrf
                 <form action="/profile/update_profile" method="post" role="form">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                            <h2>Update your profile account</h2>
-                            <hr/>
-                            <label for="phone">Phone number: </label>
-                            <input type="text" name="phone" id="phone" class="form-control" value=""
-                                   title="Phone number"
-                                   required="required"/>
-                            <label for="profile">Profile: </label>
-                            <input type="text" name="profile" id="profile" class="form-control" value=""
-                                   title="Profile"
-                                   required="required" placeholder="Example: fullstack developer"/>
-                            <div class="row">
-                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                    <label for="skill1">What's skill one?: </label>
-                                    <input type="text" name="skill1" id="skill1" class="form-control" value=""
-                                           title="skill1"
-                                           required="required" placeholder="Example: HTML"/>
-                                    <label for="skill2">What's skill two?: </label>
-                                    <input type="text" name="skill2" id="skill2" class="form-control" value=""
-                                           title="skill2"
-                                           required="required" placeholder="Example: JAVA"/>
-                                    <label for="skill3">What's skill three?: </label>
-                                    <input type="text" name="skill3" id="skill3" class="form-control" value=""
-                                           title="skill3"
-                                           required="required" placeholder="Example: JAVASCRIPT"/>
-                                    <label for="skill4">What's skill four?: </label>
-                                    <input type="text" name="skill4" id="skill4" class="form-control" value=""
-                                           title="skill4"
-                                           required="required" placeholder="Example: PYTHON"/>
+                    <legend>Update your infomation of account</legend>
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <p>Date:<b style="color: #AF2018">*</b><input class="form-control" type="text"
+                                                                                  name="date" id="datepicker"
+                                                                                  placeholder="MM/dd/YYYY"
+                                                                                  required="required"></p>
                                 </div>
-                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                    <label for="pskill1">Percent of skill one?: </label>
-                                    <input type="text" name="pskill1" id="pskill1" class="form-control" value=""
-                                           title="skill1"
-                                           required="required" placeholder="Example: 80%"/>
-                                    <label for="pskill2">Percent of skill two?: </label>
-                                    <input type="text" name="pskill2" id="pskill2" class="form-control" value=""
-                                           title="skill2"
-                                           required="required" placeholder="Example: 75%"/>
-                                    <label for="pskill3">Percent of skill three?: </label>
-                                    <input type="text" name="pskill3" id="pskill3" class="form-control" value=""
-                                           title="skill3"
-                                           required="required" placeholder="Example: 90%"/>
-                                    <label for="pskill4">Percent of skill four?: </label>
-                                    <input type="text" name="pskill4" id="pskill4" class="form-control" value=""
-                                           title="skill4"
-                                           required="required" placeholder="Example: 85%"/>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <p>Phone number:<b style="color: #AF2018">*</b><input class="form-control"
+                                                                                          name="phone"
+                                                                                          type="text" id="phone"
+                                                                                          required="required"></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <p>Address:<b style="color: #AF2018">*</b><input class="form-control" name="address"
+                                                                                     type="text" id="address"
+                                                                                     required="required"></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <p>Your strength:<textarea name="diemmanh" id="diemmanh"
+                                                               class="form-control" cols="30"
+                                                               rows="2"></textarea></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <p>Your weakness:<textarea name="diemyeu" id="diemyeu"
+                                                               class="form-control" cols="30"
+                                                               rows="2"></textarea></p>
                                 </div>
                             </div>
 
-                            <label for="about">About you: </label>
-                            <textarea name="about" class="form-control" id="about" rows="5"
-                                      required="required"></textarea>
-                            <br/>
-                            @if(Session::get('mess') != null)<p
-                                style="color: green">{{Session::get('mess')}}</p>@endif
-                            @if(Session::get('acc') != null)
-                                <button type="submit" class="btn btn-primary">Update your profile</button>@endif
-                            <br/>
-                            <br/>
-                            <br/>
-                        </div>
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <p>Level: <input type="text" name="trinhdo" class="form-control">
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <p>Speciallize: <input type="text" name="chuyenmon" class="form-control" id=""
+                                                           placeholder=""></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <p>Time work for a week: <input type="text" name="sogiolamviec" class="form-control"
+                                                                    id="" placeholder=""></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-10 radio">
+                                    <p>Gender:<b style="color: #AF2018">*</b>
+                                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                                        <label>
+                                            <input type="radio" name="gioitinh" value="1" checked="checked">
+                                            Male
+                                        </label>
+                                    </div>
+                                    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                                        <label>
+                                            <input type="radio" name="gioitinh" value="0">
+                                            FeMale
+                                        </label>
+                                    </div>
+                                    </p>
+                                </div>
+                            </div>
 
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <p>Your Skills:<b style="color: #AF2018">*</b><textarea name="kinang" id="kinang"
+                                                                                            class="form-control"
+                                                                                            cols="30"
+                                                                                            required="required"
+                                                                                            rows="2"></textarea></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <p>Your favorite:<textarea name="sothich" id="sothich"
+                                                               class="form-control" cols="30"
+                                                               rows="2"></textarea></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <p>Your project:<textarea name="duan" id="duan" class="form-control" cols="30"
+                                                              rows="2"></textarea></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <p>Your Facebook: <input type="text" name="fb" class="form-control" id=""
+                                                             placeholder=""></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <p>Your Youtube: <input type="text" name="youtube" class="form-control" id=""
+                                                            placeholder=""></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <p>Your Twitter: <input type="text" name="twitter" class="form-control" id=""
+                                                            placeholder=""></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <p>Your Github: <input type="text" name="git" class="form-control" id=""
+                                                           placeholder="">
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <p>Your Skype: <input type="text" name="skype" class="form-control" id=""
+                                                          placeholder=""></p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-10">
+                                    <p>Your website: <input type="text" name="website" class="form-control" id=""
+                                                            placeholder=""></p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <br/>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-edit"></i> Update your information
+                    </button>
+                    <a style="margin-left: 15px"  href="/" class="btn btn-success"><i class="fas fa-home"></i>
+                        Back to home
+                    </a>
+                    <br/>
+                    <br/>
+                    <br/>
                 </form>
             </div>
         @endif
