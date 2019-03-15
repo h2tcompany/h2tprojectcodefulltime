@@ -90,7 +90,7 @@ Route::get('/account/changeyourpassword', function () {
     return view('changepass', ['title' => 'Change your password', 'seeing' => 'account']);
 });
 Route::get('/account/test11', function () {
-    return view('a', ['title' => 'Login', 'seeing' => 'account']);
+    return view('a', ['title' => 'Login', 'seeing' => 'profile']);
 });
 
 /**
@@ -234,6 +234,14 @@ Route::get('/t/t/test', 'QuestionController@test');
 
 Route::get('/question/addQuestionProcess', 'QuestionController@addQuestion');
 Route::get('/question/checkresult', 'QuestionController@checkResult');
+
+
+//Profile
+Route::get('/profile/{username}', 'ProfileController@getViewProfile');
+Route::post('/profile/update_profile', 'ProfileController@updateProfileInfo');
+Route::post('/profile/edit_profile', 'ProfileController@editProfile');
+
+
 
 function get_client_ip()
 {
