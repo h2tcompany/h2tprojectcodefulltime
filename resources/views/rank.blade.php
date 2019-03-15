@@ -6,7 +6,7 @@
     <div class="panel-heading"><b style="color: black">Top high score</b></div>
     <div class="panel-body">
         @foreach($listAcc as $acc)
-            <p><a href="#">{{$acc->username}}</a><span class="badge" style="float: right">{{$acc->score}}</span></p>
+            <p><a href="/profile/{{$acc->username}}">{{$acc->username}}</a><span class="badge" style="float: right">{{$acc->score}}</span></p>
         @endforeach
     </div>
     <div class="panel-footer">

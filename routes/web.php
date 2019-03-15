@@ -239,6 +239,7 @@ Route::get('/question/checkresult', 'QuestionController@checkResult');
 //Profile
 Route::get('/profile/{username}', 'ProfileController@getViewProfile');
 Route::post('/profile/update_profile', 'ProfileController@updateProfileInfo');
+Route::post('/profile/edit_profile', 'ProfileController@editProfile');
 
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Account;
 use App\DetailsAccount;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -12,12 +13,15 @@ class ProfileController extends Controller
     public function getViewProfile(Request $request)
     {
         if (Session::get('acc') == null) {
-            return redirect('/account/login_page');
-        } else {
-            $username = Session::get('acc')->username;
+            $username = $request->username;
             $detailsProfile = DetailsAccount::where('detailsofaccount', $username)->first();
-            $name = Session::get('acc')->name;
-            return view('profile', ['title' => $name, 'seeing' => 'account','detailsProfile'=>$detailsProfile]);
+            $acc = Account::where('username', $username)->first();
+            return view('profile', ['title' => 'Profile of ' . $username, 'acc' => $acc, 'seeing' => 'account', 'detailsProfile' => $detailsProfile]);
+        } else {
+            $username = $request->username;
+            $detailsProfile = DetailsAccount::where('detailsofaccount', $username)->first();
+            $acc = Account::where('username', $username)->first();
+            return view('profile', ['title' => 'Profile of ' . $username, 'acc' => $acc, 'seeing' => 'account', 'detailsProfile' => $detailsProfile]);
         }
     }
 //    public function viewProfile(){
@@ -28,7 +32,7 @@ class ProfileController extends Controller
     public function updateProfileInfo(Request $request)
     {
         $c = round(microtime(true) * 1000);
-        $code = $c.$this->rand_string(10);
+        $code = $c . $this->rand_string(10);
         $phone = $request->phone;
         $profile = $request->profile;
         $about = $request->about;
@@ -41,6 +45,7 @@ class ProfileController extends Controller
         $percentofskill3 = $request->pskill3;
         $percentofskill4 = $request->pskill4;
         $detailsofaccount = Session::get('acc')->username;
+        $username = Session::get('acc')->username;
         $up = 1;
         $details = new DetailsAccount();
         $details->codeprofile = $code;
@@ -58,7 +63,38 @@ class ProfileController extends Controller
         $details->detailsofaccount = $detailsofaccount;
         $details->has_updated = $up;
         $details->save();
-        return redirect('/profile/{username}')->with('mess', 'Update info successfully');
+        return redirect('/profile/'.$username)->with('mess', 'Update info successfully');
+    }
+
+    public function editProfile(Request $request)
+    {
+        $codeprofile = $request->codeprofile;
+        $phone = $request->phone;
+        $profile = $request->profile;
+        $about = $request->about;
+        $skill1 = $request->skill1;
+        $skill2 = $request->skill2;
+        $skill3 = $request->skill3;
+        $skill4 = $request->skill4;
+        $percentofskill1 = $request->pskill1;
+        $percentofskill2 = $request->pskill2;
+        $percentofskill3 = $request->pskill3;
+        $percentofskill4 = $request->pskill4;
+        $username = Session::get('acc')->username;
+        DetailsAccount::where('codeprofile', $codeprofile)->update([
+            'phonenumber' => $phone,
+            'profile' => $profile,
+            'aboutme' => $about,
+            'skillone' => $skill1,
+            'percentone' => $percentofskill1,
+            'skilltwo' => $skill2,
+            'percenttwo' => $percentofskill2,
+            'skillthree' => $skill3,
+            'percentthree' => $percentofskill3,
+            'skillfour' => $skill4,
+            'percentfour' => $percentofskill4,
+        ]);
+        return redirect('/profile/'.$username)->with('mess', 'Edit your info successfully');
     }
 
 

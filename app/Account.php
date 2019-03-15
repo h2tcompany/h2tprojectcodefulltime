@@ -18,7 +18,7 @@ class Account extends Model
     }
     public function getDetails()
     {
-        return $this->hasOne('App\\DetailsAccount', 'codeprofile');
+        return $this->hasOne('App\\DetailsAccount','codeprofile');
     }
 
 }
