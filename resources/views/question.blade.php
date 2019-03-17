@@ -116,7 +116,7 @@
             </div>
         </div>
 
-        @include('rank')
+        @include('toprank')
         @include('recentpaste')
     </div>
 

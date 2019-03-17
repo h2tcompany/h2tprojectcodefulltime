@@ -8,8 +8,8 @@
     <script>
         $(document).ready(function () {
             var converter = new showdown.Converter();
-            let text = '{{$exercise->question}}';
-            $('#content').html(converter.makeHtml(text));
+            var a = $('#contenth-hide').html();
+            $('#content').html(converter.makeHtml(a));
 
 
         });
@@ -67,12 +67,15 @@
     <div class="col-sm-9">
         <h1>{{$exercise->name}} | {{$exercise->code}}</h1>
         <div id="content"></div>
-        <h3>Time limit: {{$exercise->timelimit}}</h3>
+        <div id="contenth-hide" style="display: none">{{$exercise->question}}</div>
+        <h3>Time limit: {{$exercise->timelimit}} seconds</h3>
         <h3>Best core: {{$exercise->bestscore}}</h3><br>
         <a class="btn btn-primary" href="/exercises/submit/{{$exercise->code}}" style="color:white;">Submit now</a>
     </div>
     <div class="col-sm-3">
-
+        @include('exercise.lastsubmission')
+        @include('activity')
+        @include('toprank')
     </div>
 
 

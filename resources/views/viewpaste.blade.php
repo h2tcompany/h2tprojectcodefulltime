@@ -8,7 +8,7 @@
             $('#language option[value="' + lang + '"]').attr('selected', 'selected');
             @if($paste->language == 'markdown')
                 var converter = new showdown.Converter();
-                let text = '{{$paste->contentpaste}}';
+                let text = $('#contenth-hide').html();
                 $('#content').html(converter.makeHtml(text));
             @endif
 			
@@ -43,12 +43,14 @@
             <hr>
             @if($paste->language == 'plain/text' || $paste->language == 'text/html')
                 <h3><b>Content</b></h3>
+
                 {!! $paste->contentpaste !!}
                 <hr>
 
             @elseif($paste->language == 'markdown')
                 <h3><b>Content</b></h3>
                 <div id="content"></div>
+                <div id="content-hide" style="display: none">{{$paste->contentpaste}}</div>
                 <hr>
             @else
                 <textarea id="code" name="code">{{$paste->contentpaste}}</textarea>
@@ -151,7 +153,7 @@
     <div class="col-sm-3">
         @include('recentpaste')
         @include('activity')
-        @include('rank')
+        @include('toprank')
         @include('searchingg')
     </div>
 

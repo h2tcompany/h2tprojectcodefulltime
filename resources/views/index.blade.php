@@ -1,6 +1,10 @@
 @extends('templates')
 @section('content')
-    <div class="col-sm-9">
+    <div class="col-sm-3">
+        @include('toprank')
+        @include('topcoder')
+    </div>
+    <div class="col-sm-6">
         <br>
 
         <form action="/question/start-now" method="get">
@@ -28,7 +32,6 @@
     </div>
     <div class="col-sm-3">
         @include('searchingg')
-        @include('rank')
         @include('activity')
         @include('recentpaste')
     </div>

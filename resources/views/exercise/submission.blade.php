@@ -17,9 +17,9 @@
 
                 <tr>
                     <td><a href="/exercise/{{$submission->exercisecode}}">{{$submission->exercisecode}}</a></td>
-                    <td>{{$submission->timesubmit}}</td>
+                    <td>{{$submission->time}}</td>
                     <td>{{$submission->score}}</td>
-                    <td>{{$submission->username}}</td>
+                    <td><p><a href="/profile/{{$submission->username}}">{{$submission->username}}</a></p></td>
                 </tr>
 
             @endforeach
@@ -27,6 +27,9 @@
         </table>
         {!! $ds->links()!!}
     </div>
-
+    <div class="col-sm-3">
+        @include('toprank')
+        @include('exercise.newexercise')
+    </div>
 
 @endsection

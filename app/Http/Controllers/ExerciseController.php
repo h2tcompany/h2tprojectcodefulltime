@@ -86,8 +86,9 @@ class ExerciseController extends Controller
         $exercise->output10 = $output10;
         $exercise->name = $name;
         $exercise->question = $question;
-        $c = round(microtime(true) * 1000);
-        $code = $c . rand_string(20);
+//        $c = round(microtime(true) * 1000);
+//        $code = $c . rand_string(20);
+        $code = $request->codeexercise;
         $exercise->code = $code;
         $exercise->team = $acc != null ? $acc->teamleader : "all";
         $exercise->timelimit = $request->timelimit;
@@ -187,7 +188,7 @@ class ExerciseController extends Controller
 
         $submission->save();
 
-        return response()->json(['status'=> 'ok', 'data' => $timelimit]); // data = submitted or new submit
+        return response()->json(['status' => 'ok', 'data' => $timelimit]); // data = submitted or new submit
 
 
     }

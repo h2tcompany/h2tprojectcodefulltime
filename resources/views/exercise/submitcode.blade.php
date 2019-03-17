@@ -52,7 +52,7 @@
     <div class="col-sm-9">
         <div class="form-group">
             <label for="name">Code for exercise</label>
-            <input value="{{$exercise->code}}" id="codeexercise" type="text" readonly="readonly" class="form-control"
+            <input value="{{$exercise->code}}" id="codeexercise" type="text" class="form-control"
                    name="codeexercise"
                    placeholder="Code for exercise"
                    required="required">
@@ -83,6 +83,8 @@
         <p id="status"></p>
     </div>
     <div class="col-sm-3">
+        @include('topcoder')
+        @include('exercise.newexercise')
         @include('recentpaste')
     </div>
 
@@ -242,8 +244,10 @@
                                                             '  </div>\n' +
                                                             '</div>');
 
+                                                        console.log(objTarget);
                                                         get2(timelimit, resulttest, score).then(data => {
                                                             if (data.status === 'ok') {
+
                                                                 $('#thongbao').html('Auto test generate successfully.');
                                                             }
                                                         }).catch(err => console.log(err));

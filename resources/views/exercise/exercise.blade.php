@@ -27,6 +27,11 @@
         </table>
         {!! $exercises->links()!!}
     </div>
-
+    <div class="col-sm-3">
+        @include('topcoder')
+        @include('exercise.newexercise')
+        @include('exercise.lastsubmission')
+        @include('activity')
+    </div>
 
 @endsection

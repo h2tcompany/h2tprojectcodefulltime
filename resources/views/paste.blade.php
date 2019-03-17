@@ -12,7 +12,7 @@
     <div class="col-sm-3">
         @include('recentpaste')
         @include('activity')
-        @include('rank')
+        @include('toprank')
         @include('searchingg')
 
     </div>

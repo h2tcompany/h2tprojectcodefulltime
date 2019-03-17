@@ -252,7 +252,7 @@ Route::get('/exercises/submit/{code}', "ExerciseController@SubmitPage");
 Route::post('/exercises/submit', "ExerciseController@Submit");
 Route::get('/exercises/submitted', "ExerciseController@Submitted");
 
-Route::get('/submissions/all', "ExerciseController@Get");
+Route::get('/submissions/all', "SubmissionController@Get");
 
 
 
