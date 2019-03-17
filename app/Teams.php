@@ -15,4 +15,9 @@ class Teams extends Model
     {
         return $this->hasMany('App\\Question', 'team');
     }
+
+    public function listExercise()
+    {
+        return $this->hasMany('App\\Exercise', 'team');
+    }
 }

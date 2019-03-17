@@ -14,7 +14,7 @@
     <div style="margin-left: 5%">
         <p id="down"></p>
         @foreach($listComment as $comment)
-            <p><b style="color: red">{{$comment->username}}</b>: {{$comment->comment}}</p>
+            <p><b style="color: red"><a href="/profile/{{$acc->username}}">{{$acc->username}}</a></b>: {{$comment->comment}}</p>
             <hr>
         @endforeach
 
@@ -41,7 +41,7 @@
                 success: function (data) {
                     if (data.status === 'ok') {
                         @if($acc!=null)
-                        $('#down').append('<p><b style="color: red">{{$acc->username}}</b>: ' + $('#my-question').val() + '</p>\n' +
+                        $('#down').append('<p><b style="color: red"><a href="/profile/{{$acc->username}}">{{$acc->username}}</a></b>: ' + $('#my-question').val() + '</p>\n' +
                             '                        <hr>');
                         @endif
                         $('#my-question').val('');
@@ -60,7 +60,7 @@
                     success: function (data) {
                         if (data.status === 'ok') {
                             @if($acc!=null)
-                            $('#down').append('<p><b style="color: red">{{$acc->username}}</b>: ' + $('#my-question').val() + '</p>\n' +
+                            $('#down').append('<p><b style="color: red"><a href="/profile/{{$acc->username}}">{{$acc->username}}</a></b>: ' + $('#my-question').val() + '</p>\n' +
                                 '                        <hr>');
                             @endif
                             $('#my-question').val('');

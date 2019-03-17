@@ -41,7 +41,7 @@
         <div id="navbarCollapse" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li @if($seeing =='examination') class="active" @endif id="lienhe"><a href="/"><i
-                            class="fas fa-clipboard"></i> Examination</a></li>
+                                class="fas fa-clipboard"></i> Examination</a></li>
                 @if(Session::get('acc') == null)
 
                     <li class=" @if($seeing =='account')active @endif  dropdown">
@@ -49,13 +49,13 @@
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li id="lienhe"><a href="/account/register_page"><i
-                                        class="fas fa-user-plus"></i>
+                                            class="fas fa-user-plus"></i>
                                     Sign up</a></li>
                             <li id="lienhe"><a href="/account/login_page"><i
-                                        class="fas fa-sign-in-alt"></i> Sign
+                                            class="fas fa-sign-in-alt"></i> Sign
                                     in</a></li>
                             <li id="lienhe"><a href="/account/forgotpassword"><i
-                                        class="fas fa-key"></i> Forgot your password
+                                            class="fas fa-key"></i> Forgot your password
                                 </a></li>
                         </ul>
                     </li>
@@ -67,7 +67,7 @@
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li id="lienhe"><a href="/profile/{{Session::get('acc')->username}}"><i
-                                        class="fas fa-user"></i>
+                                            class="fas fa-user"></i>
                                     Chào {{Session::get('acc')->name}}</a></li>
                             <li id="lienhe"><a href="/account/changeyourpassword"><i class="fas fa-key"></i>
                                     Change password</a></li>
@@ -77,18 +77,19 @@
                     </li>
 
                     <li style="display: none" @if($seeing =='addquestion') class="active" @endif id="lienhe"><a
-                            href="/question/addquestion"><i class="fas fa-clipboard"></i>
+                                href="/question/addquestion"><i class="fas fa-clipboard"></i>
                             Add question</a></li>
 
                 @endif
                 <li @if($seeing =='paste') class="active" @endif id="lienhe"><a href="/paste/all"><i
-                            class="fas fa-clipboard"></i>
+                                class="fas fa-clipboard"></i>
                         Paste</a></li>
 
             </ul>
 
             <div class="navbar-form navbar-left">
-                <form action="/paste/search">
+                {{--/dashboard/search--}}
+                <form action="#">
                     <div class="form-group">
                         <input type="text" name="key" id="key" class="form-control"
                                value=""
@@ -96,6 +97,22 @@
                     </div>
                     <button type="submit" id="btnSearch" class="btn btn-default">Search</button>
                 </form>
+            </div>
+
+
+            <div class="collapse navbar-collapse navbar-right">
+                <ul class="nav navbar-nav">
+
+                    <li class=" @if($seeing =='exercise')active @endif  dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Exercise
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li id="lienhe"><a href="/exercises/all"><i class="fas fa-clipboard"></i>List exercise</a></li>
+                            <li id="lienhe"><a href="/submissions/all"><i class="fas fa-clipboard"></i>Submission</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
             </div>
 
         </div>

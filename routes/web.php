@@ -213,7 +213,7 @@ Route::get('/search/google', function (Request $request) {
 
 
 Route::get('/paste/all', 'PasteController@Pastes');
-Route::get('/paste/search', 'PasteController@Search');
+Route::get('/dashboard/search', 'DashBoardController@Search');
 
 Route::post('/paste/edit-paste', 'PasteController@EditPaste');
 Route::get('/paste/new-paste', 'PasteController@CreatePastePage');
@@ -241,6 +241,44 @@ Route::get('/profile/{username}', 'ProfileController@getViewProfile');
 Route::post('/profile/update_profile', 'ProfileController@updateProfileInfo');
 Route::post('/profile/edit_profile', 'ProfileController@editProfile');
 
+
+//Chấm code
+Route::get('/exercises/all', 'ExerciseController@Exercise');
+Route::post('/exercises/add-new', "ExerciseController@Add");
+Route::get('/exercise/{code}', 'ExerciseController@GetExercise');
+Route::get('/exercises/add-new', "ExerciseController@AddPage");
+Route::post('/exercises/edit', "ExerciseController@Edit");
+Route::get('/exercises/submit/{code}', "ExerciseController@SubmitPage");
+Route::post('/exercises/submit', "ExerciseController@Submit");
+Route::get('/exercises/submitted', "ExerciseController@Submitted");
+
+Route::get('/submissions/all', "ExerciseController@Get");
+
+
+
+Route::get('/aaaaaaaa/welcome',function (){
+    return view('welcome');
+});
+Route::post('/avv/test', function (Request $request) {
+    $source = $request->source_code;
+//    $source = htmlspecialchars($source);
+    echo $source;die;
+    $payload = '';
+
+
+    echo $payload;
+    die;
+    $post = (array)json_decode($payload);
+    var_dump($post);
+    die;
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, 'https://api.judge0.com/submissions?wait=true');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
+    $response = curl_exec($ch);
+    var_export($response);
+    curl_close($ch);
+});
 
 
 function get_client_ip()
