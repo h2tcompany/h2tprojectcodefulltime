@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Account;
 use App\Exercise;
 use App\Submission;
 use Illuminate\Http\Request;
@@ -175,6 +176,8 @@ class ExerciseController extends Controller
         $time = date('h:i:s d-m-Y');
         $timelimit = $request->timelimit;
         $resulttest = $request->resulttest;
+        $sourceCode = $request->sourcecode;
+
 
         $submission = new Submission();
         $submission->code = $code;
@@ -185,8 +188,38 @@ class ExerciseController extends Controller
         $submission->exercisecode = $codeExercise;
         $submission->language = $language;
         $submission->resulttest = $resulttest;
-
+        $submission->sourcecode = $sourceCode;
         $submission->save();
+
+        // tính điểm với yêu cầu sau: Nếu đã làm bài tập A với 5 điểm thì lần sau thấp hơn thì bỏ nhiều hơn thì lấy
+
+        // Giải thuật nhẹ như sau: CHọn ra điểm cao nhất rồi so sánh với điểm vừa làm được.
+        // Nếu điểm vừa làm đc lướn hơn điểm cao nhất trong mọi lần thì thực hiện. Lấy điểm username - điểm cũ + điểm mới
+
+        $getMaxScoreOfSubmission = Submission::where('username', $username)->where('exercisecode', $codeExercise)->orderby('score', 'desc')->first();
+        $account = Account::where('username', $username)->first();
+        $scoreOfExerciseOld = $account->scoreexercise;
+        if ($getMaxScoreOfSubmission != null) { // đã làm rồi
+            $scoreMax = $getMaxScoreOfSubmission->score;
+            if ($scoreMax < $score) {
+                Account::where('username', $username)->update([
+                    'scoreexercise' => ($scoreOfExerciseOld - $scoreMax + $score)
+                ]);
+            }
+        } else {
+            Account::where('username', $username)->update([
+                'scoreexercise' => ($scoreOfExerciseOld + $score)
+            ]);
+        }
+
+        $exercise = Exercise::where('code', $codeExercise)->first();
+
+        if ($exercise->bestscore < $score) {
+            Exercise::where('code', $codeExercise)->update([
+                'bestscore' => $score
+            ]);
+        }
+
 
         return response()->json(['status' => 'ok', 'data' => $timelimit]); // data = submitted or new submit
 

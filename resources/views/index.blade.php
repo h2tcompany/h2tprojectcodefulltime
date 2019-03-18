@@ -3,6 +3,7 @@
     <div class="col-sm-3">
         @include('toprank')
         @include('topcoder')
+        @include('exercise.newexercise')
     </div>
     <div class="col-sm-6">
         <br>
@@ -34,5 +35,6 @@
         @include('searchingg')
         @include('activity')
         @include('recentpaste')
+
     </div>
 @endsection

@@ -172,7 +172,7 @@
             ];
             $('#btnSubmitCode').on('click', function () {
                 $('#status').empty();
-                $('#showscore').css('display','none');
+                $('#showscore').css('display', 'none');
                 $('#thongbao').html('Auto test starting');
                 get1(stdIn[0]).then(output1 => {
                     objTarget.output1 = output1;
@@ -224,14 +224,14 @@
                                                             var obj = objTarget[a];
                                                             if (obj.time >= timelimit) {
                                                                 resulttest.push('time limit');
-                                                                $('#status').append('<div class="alert alert-warning" role="alert"><a href="#" class="alert-link">Test case ' + (i + 1) + ' is timelimit with time '+obj.time+'</a></div>');
-                                                            } else if (obj.stdout === listOutput[i]) {
+                                                                $('#status').append('<div class="alert alert-warning" role="alert"><a href="#" class="alert-link">Test case ' + (i + 1) + ' is timelimit with time ' + obj.time + '</a></div>');
+                                                            } else if (optomize(obj.stdout) === listOutput[i]) {
                                                                 score++;
                                                                 resulttest.push('right');
-                                                                $('#status').append('<div class="alert alert-success" role="alert"><a href="#" class="alert-link">Test case ' + (i + 1) + ' is correct with time '+obj.time+'</a></div>');
+                                                                $('#status').append('<div class="alert alert-success" role="alert"><a href="#" class="alert-link">Test case ' + (i + 1) + ' is correct with time ' + obj.time + '</a></div>');
                                                             } else {
                                                                 resulttest.push('wrong');
-                                                                $('#status').append('<div class="alert alert-danger" role="alert"><a href="#" class="alert-link">Test case ' + (i + 1) + ' was wrong with time '+obj.time+'</a></div>')
+                                                                $('#status').append('<div class="alert alert-danger" role="alert"><a href="#" class="alert-link">Test case ' + (i + 1) + ' was wrong with time ' + obj.time + '</a></div>')
                                                             }
                                                             i++;
                                                         }
@@ -245,7 +245,7 @@
                                                             '</div>');
 
                                                         console.log(objTarget);
-                                                        get2(timelimit, resulttest, score).then(data => {
+                                                        get2(timelimit, resulttest, score, editor.getValue()).then(data => {
                                                             if (data.status === 'ok') {
 
                                                                 $('#thongbao').html('Auto test generate successfully.');
@@ -268,13 +268,25 @@
             return score * 10;
         }
 
-        var get2 = function (timelimit, resulttest, score) {
+        function optomize(output) {
+            var temp = output;
+            if (temp !== null) {
+                temp = temp.trim();
+                temp = temp.replace('\n', '');
+            }
+
+            return temp;
+
+        }
+
+        var get2 = function (timelimit, resulttest, score, sourceCode) {
             return new Promise((resolve, reject) => {
                 $.ajax({
                     url: '/exercises/submitted',
                     data: {
                         codeExercise: $('#codeexercise').val(),
                         score: score,
+                        sourcecode: sourceCode,
                         language: $('#language').val(),
                         timelimit: timelimit,
                         resulttest: resulttest.join(',')

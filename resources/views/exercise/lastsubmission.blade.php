@@ -5,8 +5,7 @@
     <div class="panel-heading"><b style="color: black">Latest submission</b></div>
     <div class="panel-body">
         @foreach($listSubmission as $submission)
-            <p><a href="/exercise/{{$submission->codeexercise}}">{{$submission->codeexercise}}</a>
-                <a href="/exercise/{{$submission->username}}">{{$submission->username}}</a>
+            <p><a href="/exercise/{{$submission->exercisecode}}">{{$submission->exercisecode}}</a>-<a href="/exercise/{{$submission->username}}">{{$submission->username}}</a>
                 <span class="badge" style="float: right">{{$submission->score}}</span></p>
         @endforeach
     </div>

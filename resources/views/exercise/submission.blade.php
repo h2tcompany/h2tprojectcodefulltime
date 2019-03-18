@@ -29,6 +29,7 @@
     </div>
     <div class="col-sm-3">
         @include('toprank')
+        @include('topcoder')
         @include('exercise.newexercise')
     </div>
 
