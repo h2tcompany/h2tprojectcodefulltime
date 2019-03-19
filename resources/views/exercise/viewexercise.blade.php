@@ -68,9 +68,9 @@
         <h1>{{$exercise->name}} | {{$exercise->code}}</h1>
         <div id="content"></div>
         <div id="contenth-hide" style="display: none">{{$exercise->question}}</div>
-        <h3>Time limit: {{$exercise->timelimit}} seconds</h3>
+        <h3><span class="glyphicon glyphicon-calendar"></span> Time limit: {{$exercise->timelimit}} seconds</h3>
         <h3>Best core: {{$exercise->bestscore}}</h3><br>
-        <a class="btn btn-primary" href="/exercises/submit/{{$exercise->code}}" style="color:white;">Submit now</a>
+        <a class="btn btn-primary" href="/exercises/submit/{{$exercise->code}}" style="color:white;"><span class="glyphicon glyphicon-send"></span> Submit now</a>
     </div>
     <div class="col-sm-3">
         @include('exercise.lastsubmission')

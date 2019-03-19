@@ -41,21 +41,16 @@
         <div id="navbarCollapse" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li @if($seeing =='examination') class="active" @endif id="lienhe"><a href="/"><i
-                                class="fas fa-clipboard"></i> Examination</a></li>
+                                class="glyphicon glyphicon-random"></i>&nbsp;&nbsp;Examination</a></li>
                 @if(Session::get('acc') == null)
 
                     <li class=" @if($seeing =='account')active @endif  dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Account
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Account
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li id="lienhe"><a href="/account/register_page"><i
-                                            class="fas fa-user-plus"></i>
-                                    Sign up</a></li>
-                            <li id="lienhe"><a href="/account/login_page"><i
-                                            class="fas fa-sign-in-alt"></i> Sign
-                                    in</a></li>
-                            <li id="lienhe"><a href="/account/forgotpassword"><i
-                                            class="fas fa-key"></i> Forgot your password
+                            <li id="lienhe"><a href="/account/register_page"><i class="fas fa-user-plus"></i>&nbsp;&nbsp;Sign up</a></li>
+                            <li id="lienhe"><a href="/account/login_page"><i class="glyphicon glyphicon-log-in"></i>&nbsp;&nbsp;Sign in</a></li>
+                            <li id="lienhe"><a href="/account/forgotpassword"><i class="fas fa-key"></i>&nbsp;&nbsp;Forgot your password
                                 </a></li>
                         </ul>
                     </li>
@@ -63,27 +58,21 @@
                 @if(Session::get('acc') != null)
 
                     <li class=" @if($seeing =='account')active @endif  dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Account
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Account
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li id="lienhe"><a href="/profile/{{Session::get('acc')->username}}"><i
-                                            class="fas fa-user"></i>
-                                    Chào {{Session::get('acc')->name}}</a></li>
-                            <li id="lienhe"><a href="/account/changeyourpassword"><i class="fas fa-key"></i>
-                                    Change password</a></li>
-                            <li id="lienhe"><a href="/account/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                                            class="glyphicon glyphicon-export"></i>&nbsp;&nbsp;Chào {{Session::get('acc')->name}}</a></li>
+                            <li id="lienhe"><a href="/account/changeyourpassword"><i class="glyphicon glyphicon-transfer"></i>&nbsp;&nbsp;Change password</a></li>
+                            <li id="lienhe"><a href="/account/logout"><i class="glyphicon glyphicon-log-out"></i>&nbsp;&nbsp;Logout</a>
 
                         </ul>
                     </li>
 
-                    <li style="display: none" @if($seeing =='addquestion') class="active" @endif id="lienhe"><a
-                                href="/question/addquestion"><i class="fas fa-clipboard"></i>
-                            Add question</a></li>
+                    <li style="display: none" @if($seeing =='addquestion') class="active" @endif id="lienhe"><a href="/question/addquestion"><i class="glyphicon glyphicon-plus"></i>&nbsp;&nbsp;Add question</a></li>
 
                 @endif
-                <li @if($seeing =='paste') class="active" @endif id="lienhe"><a href="/paste/all"><i
-                                class="fas fa-clipboard"></i>
-                        Paste</a></li>
+                <li @if($seeing =='paste') class="active" @endif id="lienhe"><a href="/paste/all"><i class="fas fa-clipboard"></i>&nbsp;&nbsp;Paste</a></li>
 
             </ul>
 
@@ -95,7 +84,7 @@
                                value=""
                                placeholder="Anything in website" required>
                     </div>
-                    <button type="submit" id="btnSearch" class="btn btn-default">Search</button>
+                    <button type="submit" id="btnSearch" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
                 </form>
             </div>
 
@@ -104,11 +93,11 @@
                 <ul class="nav navbar-nav">
 
                     <li class=" @if($seeing =='exercise')active @endif  dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Exercise
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-signal"></span>&nbsp;&nbsp;Exercise
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li id="lienhe"><a href="/exercises/all"><i class="fas fa-clipboard"></i>List exercise</a></li>
-                            <li id="lienhe"><a href="/submissions/all"><i class="fas fa-clipboard"></i>Submission</a></li>
+                            <li id="lienhe"><a href="/exercises/all"><i class="glyphicon glyphicon-list-alt"></i>&nbsp;&nbsp;List exercise</a></li>
+                            <li id="lienhe"><a href="/submissions/all"><i class="glyphicon glyphicon-th-list"></i>&nbsp;&nbsp;Submission</a></li>
                         </ul>
                     </li>
 

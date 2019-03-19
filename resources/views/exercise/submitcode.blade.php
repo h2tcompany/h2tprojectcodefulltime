@@ -78,7 +78,7 @@
             </select>
         </p>
         <p style="color: red" id="thongbao"></p>
-        <button id="btnSubmitCode" class="btn btn-primary">Submit</button>
+        <button id="btnSubmitCode" class="btn btn-primary"><span class="glyphicon glyphicon-send"></span> Submit</button>
         <h1 id="showscore" style="display: none;color: red"></h1>
         <p id="status"></p>
     </div>
