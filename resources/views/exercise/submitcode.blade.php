@@ -50,6 +50,9 @@
 
 
     <div class="col-sm-9">
+        <div class="help">
+
+        </div>
         <div class="form-group">
             <label for="name">Code for exercise</label>
             <input value="{{$exercise->code}}" id="codeexercise" type="text" class="form-control"
@@ -78,7 +81,13 @@
             </select>
         </p>
         <p style="color: red" id="thongbao"></p>
-        <button id="btnSubmitCode" class="btn btn-primary"><span class="glyphicon glyphicon-send"></span> Submit</button>
+        @if(Session::get('acc')!=null)
+            <button id="btnSubmitCode" class="btn btn-primary"><span class="glyphicon glyphicon-send"></span> Submit
+            </button>
+        @else
+            <a href="/account/login_page" class="btn btn-primary"><span class="glyphicon glyphicon-send"></span> Required
+                login first</a>
+        @endif
         <h1 id="showscore" style="display: none;color: red"></h1>
         <p id="status"></p>
     </div>
@@ -246,10 +255,11 @@
 
                                                         console.log(objTarget);
                                                         get2(timelimit, resulttest, score, editor.getValue()).then(data => {
-                                                            if (data.status === 'ok') {
-
-                                                                $('#thongbao').html('Auto test generate successfully.');
-                                                            }
+                                                            console.log(data);
+                                                            // if (data.status === 'ok') {
+                                                            //
+                                                            //     $('#thongbao').html('Auto test generate successfully.');
+                                                            // }
                                                         }).catch(err => console.log(err));
                                                     });
                                                 });

@@ -61,7 +61,7 @@ Route::get('/', function (Request $request) {
         }
         $rpExam->times = $times;
         $rpExam->time = date('h:i:s d-m-Y');
-        $rpExam->location = getLocation();
+        $rpExam->location = 'VN';
         $rpExam->team = $team;
         $rpExam->lang = $lang;
         $rpExam->numberofquestion = count(Session::get("list-question"));
@@ -71,7 +71,7 @@ Route::get('/', function (Request $request) {
         Session::put('list-question', []);
         return view('notify', ['message' => $message, 'title' => 'Notify', 'seeing' => 'index', "reportexam" => $code]);
     }
-    return view('index', ['title' => 'Examination for Java, Javascript, CSharp, Notepad online and more. You can share for earn money. You can create room for examination and share for your student', 'lang' => $lang, 'seeing' => 'index', 'teams' => $team]);
+    return view('index', ['title' => 'Examination for Java, Javascript, CSharp, Notepad online and more. You can share for earn money. You can create room for examination and share for your student', 'lang' => $lang, 'seeing' => 'examination', 'teams' => $team]);
 });
 
 Route::get('/account/register_page', function () {
@@ -139,14 +139,14 @@ Route::get('/question/showquestion', function () {
     $quj = null;
 
     if (Session::get('team') == null || Session::get('team') != 'all') { // lấy team đã chọn ra kiểm tra
-        $quj = \App\Question::where('lang', Session::get('lang'))->whereNotIn('code', $listQS)->where('location', getLocation())->where('team', Session::get('team'))->inRandomOrder()->get()->first();
+        $quj = \App\Question::where('lang', Session::get('lang'))->whereNotIn('code', $listQS)->where('team', Session::get('team'))->inRandomOrder()->get()->first();
     } else {
-        $quj = \App\Question::where('lang', Session::get('lang'))->whereNotIn('code', $listQS)->where('location', getLocation())->inRandomOrder()->get()->first();
+        $quj = \App\Question::where('lang', Session::get('lang'))->whereNotIn('code', $listQS)->inRandomOrder()->get()->first();
     }
 
     if ($quj == null) {
         $diem = Session::get('score');
-        $quj = \App\Question::where('location', getLocation())->get();
+        $quj = \App\Question::all();
 
         if ($diem == count($quj)) {
             return view('notify', ['message' => 'You are complete all the question of language.', 'title' => 'Notify', 'seeing' => 'addquestion']);
@@ -254,15 +254,19 @@ Route::get('/exercises/submitted', "ExerciseController@Submitted");
 
 Route::get('/submissions/all', "SubmissionController@Get");
 
+Route::get('/rank/exercise', "RankController@Exercise");
+Route::get('/rank/examination', "RankController@Examination");
 
 
-Route::get('/aaaaaaaa/welcome',function (){
+
+Route::get('/aaaaaaaa/welcome', function () {
     return view('welcome');
 });
 Route::post('/avv/test', function (Request $request) {
     $source = $request->source_code;
 //    $source = htmlspecialchars($source);
-    echo $source;die;
+    echo $source;
+    die;
     $payload = '';
 
 
@@ -301,17 +305,17 @@ function get_client_ip()
     return $ipaddress;
 }
 
-function getLocation()
-{
-    $ip = get_client_ip();
-    if ($ip == '127.0.0.1') {
-        return 'VN';
-    }
-    $details = json_decode(file_get_contents("http://ipinfo.io/" . $ip . "/json"));
-    $country = $details->country;
-    if ($country != 'VN') return 'EN';
-    return 'VN';
-}
+//function getLocation()
+//{
+//    $ip = get_client_ip();
+//    if ($ip == '127.0.0.1') {
+//        return 'VN';
+//    }
+//    $details = json_decode(file_get_contents("http://ipinfo.io/" . $ip . "/json?token=6d9722f1bf4a87"));
+//    $country = $details->country;
+//    if ($country != 'VN') return 'EN';
+//    return 'VN';
+//}
 
 function rand_string($length)
 {

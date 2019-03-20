@@ -13,7 +13,9 @@
                 <label for="lan">Type of question</label>
                 <select name="lan" id="lan" class="form-control">
                     @foreach($lang as $l)
-                        <option value="{{$l->lang}}"> {{$l->name}} </option>
+                        @if($l->status != 'hide')
+                            <option value="{{$l->lang}}"> {{$l->name}} </option>
+                        @endif
                     @endforeach
                 </select>
             </div>
@@ -21,7 +23,9 @@
                 <label for="lan">Your team: </label>
                 <select name="team" id="team" class="form-control">
                     @foreach($teams as $team)
-                        <option value="{{$team->team}}"> {{$team->name}} </option>
+                        @if($team->status != 'hide')
+                            <option value="{{$team->team}}"> {{$team->name}} </option>
+                        @endif
                     @endforeach
                 </select>
             </div>
