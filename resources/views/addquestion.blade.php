@@ -89,12 +89,12 @@
             </p>
 
             <p>Select your language of question</p>
-            <p>
-                <select name="location" id="location" class="form-control">
-                    <option value="VN">Vietname</option>
-                    <option value="EN">English</option>
-                </select>
-            </p>
+            {{--<p>--}}
+                {{--<select name="location" id="location" class="form-control">--}}
+                    {{--<option value="VN">Vietname</option>--}}
+                    {{--<option value="EN">English</option>--}}
+                {{--</select>--}}
+            {{--</p>--}}
 
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

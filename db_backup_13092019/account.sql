@@ -1,0 +1,10 @@
+INSERT INTO `account` VALUES ('62640', 'NoNameK', 'NoNameK', 'Noname@gmail.com', '$2y$10$T67Zc1AB6Lsr.6wwYzfOReXuSKy.mke8xhvu5TBUcV6ZcKoQ0ePJS', NULL, '0', '1', NULL, NULL, 'all', 0);
+INSERT INTO `account` VALUES ('64862', 'Ok', 'Ok', 'noname@gmail.com', '$2y$10$ykJU7sk8tNRvYLumrc4mZedKJs.qPj8syOa6jaYYnagzoKb24FrQ.', NULL, '0', '1', NULL, NULL, 'all', 0);
+INSERT INTO `account` VALUES ('43318', 'Sơn Tùng', 'admin', 'cfcf.go.vn@gmail.com', '$2y$10$Dp83HUm//eftO/q0kHi1xe.39mpgI1IrX/IfdYnTStuB3agW48JM2', NULL, '0', '1', NULL, NULL, 'all', 0);
+INSERT INTO `account` VALUES ('93002', 'lê tuấn anh', 'alw', 'tuananh1001lk@gmail.com', '$2y$10$b4dPx/G6qmfVJBltsc7Aqees3aTUQnN/Cf8ZXbFdBKOVGrMJJv70W', NULL, '0', '1', NULL, NULL, 'all', 0);
+INSERT INTO `account` VALUES ('50732', 'chien nguyen', 'chien5572', 'chien5572@gmail.com', '$2y$10$PpFddFWf0.7.FQziCfIddu47KPLG9qbHzi0EpCovX3RKzhdMsnf/y', NULL, '1', '1', NULL, NULL, 'all', 0);
+INSERT INTO `account` VALUES ('94085', 'Hậu', 'chutich', 'nguyentanhau165997@gmail.com', '$2y$10$yqdDoWcOnMSAhi.NABXCIOyGMEOw76a3dXVcvM2W.ub1vOdAx34Tm', NULL, '0', '1', NULL, NULL, 'all', 25);
+INSERT INTO `account` VALUES ('78455', 'Vũ Thị Mai Thanh', 'maithanh', 'thinh031097@gmail.com', '$2y$10$gTRxG7Jn0flP/7kd9EIWWOek1rYhG.p/HNvambyC5LutTgoS/ZSi6', NULL, '0', '1', NULL, NULL, 'all', 0);
+INSERT INTO `account` VALUES ('80233', 'tan', 'tan', 'tan@gmail.com', '$2y$10$oOJVA6rq15wXPEoqmq6wieuP/QkKnU/5G2C2RBBkC6tbC/UNcY/42', NULL, '0', '1', NULL, NULL, 'all', 0);
+INSERT INTO `account` VALUES ('01', 'unknow', 'unknow', NULL, 'ABcdabcd1', NULL, '0', '0', NULL, NULL, 'all', 0);
+INSERT INTO `account` VALUES ('84938', 'Lê Văn Thịnh', 'vanthinhit310', 'thinh031097@gmail.com', '$2y$10$U5kUP7SdvqP1Nad54NCSZuXZR9EgJw3bb85hbwiQEf9NzKywFn8TK', NULL, '23', '1', NULL, NULL, 'all', 0);

@@ -35,7 +35,7 @@ class QuestionController extends Controller
         $q->lang = $request->typeqs;
         $q->style = $request->style;
         $q->adder = Session::get('acc')->name;
-        $q->location = $request->location;
+//        $q->location = $request->location;
         $q->team = $teamleader; // Thuộc tính team xác định câu hỏi chỉ hiển thị cho team nào đó
         $q->save();
         return redirect('/question/addquestion')->with('message', 'Question added');

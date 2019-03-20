@@ -179,17 +179,6 @@ class ExerciseController extends Controller
         $sourceCode = $request->sourcecode;
 
 
-        $submission = new Submission();
-        $submission->code = $code;
-        $submission->username = $username;
-        $submission->timelimit = $timelimit;
-        $submission->score = $score;
-        $submission->time = $time;
-        $submission->exercisecode = $codeExercise;
-        $submission->language = $language;
-        $submission->resulttest = $resulttest;
-        $submission->sourcecode = $sourceCode;
-        $submission->save();
 
         // tính điểm với yêu cầu sau: Nếu đã làm bài tập A với 5 điểm thì lần sau thấp hơn thì bỏ nhiều hơn thì lấy
 
@@ -197,6 +186,7 @@ class ExerciseController extends Controller
         // Nếu điểm vừa làm đc lướn hơn điểm cao nhất trong mọi lần thì thực hiện. Lấy điểm username - điểm cũ + điểm mới
 
         $getMaxScoreOfSubmission = Submission::where('username', $username)->where('exercisecode', $codeExercise)->orderby('score', 'desc')->first();
+
         $account = Account::where('username', $username)->first();
         $scoreOfExerciseOld = $account->scoreexercise;
         if ($getMaxScoreOfSubmission != null) { // đã làm rồi
@@ -212,6 +202,18 @@ class ExerciseController extends Controller
             ]);
         }
 
+        $submission = new Submission();
+        $submission->code = $code;
+        $submission->username = $username;
+        $submission->timelimit = $timelimit;
+        $submission->score = $score;
+        $submission->time = $time;
+        $submission->exercisecode = $codeExercise;
+        $submission->language = $language;
+        $submission->resulttest = $resulttest;
+        $submission->sourcecode = $sourceCode;
+        $submission->save();
+
         $exercise = Exercise::where('code', $codeExercise)->first();
 
         if ($exercise->bestscore < $score) {
@@ -219,7 +221,6 @@ class ExerciseController extends Controller
                 'bestscore' => $score
             ]);
         }
-
 
         return response()->json(['status' => 'ok', 'data' => $timelimit]); // data = submitted or new submit
 
