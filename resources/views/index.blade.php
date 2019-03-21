@@ -6,6 +6,16 @@
         @include('exercise.newexercise')
     </div>
     <div class="col-sm-6">
+        <div class="rule">
+            <h3>Luật:</h3>
+            <p>Các bài tập sẽ được làm dưới dạng trắc nghiệm A, B, C, D. Thời gian không giới hạn</p>
+            <p>Mỗi câu đúng được 1 điểm. Điểm sau khi kết thúc 1 lượt kiểm tra là số câu trả lời đúng liên tiếp.</p>
+            <p>Điểm của bạn sẽ là điểm cao nhất trong tất cả các lượt kiểm tra.</p>
+            <p>Lưu ý: 1 câu sai sẽ làm cho quá trình kiểm tra kết thúc</p>
+            <hr>
+            <h1>Chú ý:</h1>
+            <strong>Nếu các bạn không đăng nhập điểm của bạn sẽ không được ghi nhận. </strong>
+        </div>
         <br>
 
         <form action="/question/start-now" method="get">

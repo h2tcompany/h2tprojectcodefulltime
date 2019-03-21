@@ -51,7 +51,65 @@
 
     <div class="col-sm-9">
         <div class="help">
+            <p><strong>Lưu ý quan trọng:</strong></p>
+            <ul>
+                <li>Trong code của bạn chỉ đọc và xuất ra kết quả mà đề bài yêu cầu, <strong>không thừa, không
+                        thiếu</strong>. Ví dụ bài tổng 2 số như trên, bạn chỉ xuất ra kết quả, không xuất bất kỳ cái gì
+                    khác như: printf(&#8220;Nhap a = &#8220;); như vậy sẽ thừa.
+                </li>
+                <li>Trong code của bạn <strong>không dùng</strong> các lệnh để dừng màn hình hoặc các lệnh hệ thống đặc
+                    biệt như system(&#8220;pause&#8221;), getch(),&#8230;
+                </li>
+                <li>Trong code <strong>không dùng</strong> thư viện <strong>conio.h</strong> (với ngôn ngữ C/C++).</li>
+                <li>Với các bài về chuỗi ký tự, các bạn <strong>không dùng fflush(stdin) </strong>để xoá bộ đệm, nếu
+                    phải xoá bộ đệm hãy dùng gets 2 lần để nhập xâu.
+                </li>
+            </ul>
+            <ul>
+                <li>Đối với java, các bạn đặt tên class luôn là <strong>Main</strong> (class Main).</li>
+                <li>Nếu đề bài có nêu điều kiện, thì giá trị các số trong test sẽ chuẩn như vậy. Ví cho x &lt; 100 thì
+                    chắc chắn các test sẽ luôn có x &lt; 100, các bạn <strong>không cần kiểm tra</strong> xem có thỏa
+                    mãn điều kiện x &lt; 100 hay không.
+                </li>
+            </ul>
+            <button class="btn btn-danger" data-toggle="collapse" data-target="#demo">View example</button>
 
+            <div id="demo" class="collapse">
+                <p><a name="c"></a><em><strong>Code ví dụ cho bài tính tổng 2 số theo ngôn ngữ C:</strong></em></p>
+                <pre>#include &lt;stdio.h&gt;
+int main() {
+    int a, b;
+    scanf("%d%d", &amp;a, &amp;b);
+    printf("%d", a + b);
+
+    return 0;
+}
+</pre>
+                <p><a name="java"></a><em><strong>Code ví dụ cho bài tính tổng 2 số theo ngôn ngữ Java:</strong></em>
+                </p>
+                <pre>import java.util.*;
+class Main {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        int a = scan.nextInt();
+        int b = scan.nextInt();
+        System.out.println(a + b);
+    }
+}
+</pre>
+
+                <p><a name="py"></a><em><strong>Code ví dụ cho bài tính tổng 2 số theo ngôn ngữ Python:</strong></em>
+                </p>
+                <pre># Doc 2 so tren 1 dong
+a, b = map(int, input().split())
+
+# Cong 2 so
+sum = a + b
+
+# in ra tong
+print(sum)
+</pre>
+            </div>
         </div>
         <div class="form-group">
             <label for="name">Code for exercise</label>
@@ -67,8 +125,6 @@
                 <option value="text/x-c++src">C++</option>
                 <option value="text/x-java">Java</option>
                 <option value="text/x-python">Python 3</option>
-                <option value="text/javascript">Javascript</option>
-                <option value="text/x-ruby">Ruby</option>
             </select>
         </p>
         <p>Select a theme: <select class="form-control" onchange="selectTheme()" id=select>
@@ -85,7 +141,8 @@
             <button id="btnSubmitCode" class="btn btn-primary"><span class="glyphicon glyphicon-send"></span> Submit
             </button>
         @else
-            <a href="/account/login_page" class="btn btn-primary"><span class="glyphicon glyphicon-send"></span> Required
+            <a href="/account/login_page" class="btn btn-primary"><span class="glyphicon glyphicon-send"></span>
+                Required
                 login first</a>
         @endif
         <h1 id="showscore" style="display: none;color: red"></h1>
